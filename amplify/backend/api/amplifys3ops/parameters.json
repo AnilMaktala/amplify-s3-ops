@@ -1,0 +1,6 @@
+{
+  "AppSyncApiName": "amplifys3ops",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthModeLastUpdated": "2023-07-21T15:31:22.846Z"
+}

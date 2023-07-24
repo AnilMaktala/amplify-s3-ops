@@ -1,0 +1,119 @@
+enum Bucket {
+  TOPN
+  XORG
+  CUT
+}
+
+type OutputGoal @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  title: String!
+  description: String!
+  status: Status
+  class: Goal
+  start: AWSDate
+  end: AWSDate
+  organizationID: ID! @index(name: "byOrganization")
+  InputGoals: [InputGoal] @hasMany(indexName: "byOutputGoal", fields: ["id"])
+}
+
+enum Goal {
+  STEAM
+  AWS
+  S3
+  TEAM
+}
+
+type InputGoal @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  title: String!
+  description: String!
+  status: Status
+  class: Goal
+  start: AWSDate
+  end: AWSDate
+  outputgoalID: ID! @index(name: "byOutputGoal")
+}
+
+enum Funding {
+  FLAT
+  INC
+  ASK
+  CUT
+}
+
+type Project @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  title: String!
+  description: String
+  rank: Float!
+  priority: Funding
+  headcount: Float
+  Owner: Person @hasOne
+  Sponsor: Person @hasOne
+  Initiative: Initiative @hasOne
+}
+
+type Team @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String!
+  description: String
+  headcount: Int!
+  organizationID: ID! @index(name: "byOrganization")
+  Manager: Person @hasOne
+  InputGoal: InputGoal @hasOne
+}
+
+type Person @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  alias: String!
+  name: String!
+  email: String
+}
+
+type Organization @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String!
+  description: String
+  headcount: Int!
+  Teams: [Team] @hasMany(indexName: "byOrganization", fields: ["id"])
+  Manager: Person @hasOne
+  OutputGoals: [OutputGoal] @hasMany(indexName: "byOrganization", fields: ["id"])
+  planID: ID! @index(name: "byPlan")
+}
+
+enum Status {
+  PROPOSED
+  ACTIVE
+  CANCELLED
+}
+
+type Initiative @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  title: String!
+  description: String
+  rank: Float
+  themeID: ID! @index(name: "byTheme")
+  planID: ID! @index(name: "byPlan")
+  status: Status!
+  Sponsor: Person @hasOne
+  bucket: Bucket
+}
+
+type Theme @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  title: String!
+  description: String
+  planID: ID! @index(name: "byPlan")
+  Initiatives: [Initiative] @hasMany(indexName: "byTheme", fields: ["id"])
+}
+
+type Plan @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  title: String!
+  description: String
+  year: Int!
+  Themes: [Theme] @hasMany(indexName: "byPlan", fields: ["id"])
+  Initiatives: [Initiative] @hasMany(indexName: "byPlan", fields: ["id"])
+  Organizations: [Organization] @hasMany(indexName: "byPlan", fields: ["id"])
+}
+ 
