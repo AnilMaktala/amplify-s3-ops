@@ -6,10 +6,10 @@ import { withAuthenticator } from '@aws-amplify/ui-react';
 import { Link, Outlet } from "react-router-dom";
 
 import TopNavigation from "@cloudscape-design/components/top-navigation";
-function App() {
+function App({ signOut, user }) {
   return (
     <div className="App">
-      <NavBarHeader2 width="100%" />
+      {/* <NavBarHeader2 width="100%" /> */}
       <TopNavigation
         identity={{
           href: "#",
@@ -73,6 +73,24 @@ function App() {
           },
           {
             type: "menu-dropdown",
+            text: "Goals",
+            ariaLabel: "Goals",
+            title: "Goals",
+            items: [
+              {
+                id: "settings-org",
+                text: "Input Goal",
+                href: "./inputgoal",
+                external: false,
+              },
+              {
+                id: "settings-project",
+                text: "Output Goal"
+              }
+            ]
+          },
+          {
+            type: "menu-dropdown",
             iconName: "settings",
             ariaLabel: "Settings",
             title: "Settings",
@@ -89,7 +107,7 @@ function App() {
           },
           {
             type: "menu-dropdown",
-            text: "Customer Name",
+            text: "{ user }",
             description: "email@example.com",
             iconName: "user-profile",
             items: [
@@ -119,7 +137,7 @@ function App() {
                   }
                 ]
               },
-              { id: "signout", text: "Sign out" }
+              { id: "signout", text: "Sign out", }
             ]
           }
         ]}

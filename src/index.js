@@ -13,6 +13,7 @@ import Plans from './components/plans/plans';
 import awsExports from "./aws-exports";
 import Organizations from './components/organizations/organizations';
 import Teams from './components/teams/teams';
+import InputGoal from './components/inputgoal/inputgoal';
 Amplify.configure(awsExports)
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -25,6 +26,7 @@ root.render(
         <Route path="plans" element={<Plans />} />
         <Route path="organizations" element={<Organizations />} />
         <Route path="teams" element={<Teams />} />
+        <Route path="inputgoal" element={<InputGoal />} />
       </Route>
     </Routes>
   </BrowserRouter>

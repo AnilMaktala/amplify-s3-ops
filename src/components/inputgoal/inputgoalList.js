@@ -14,13 +14,13 @@ import SpaceBetween from "@cloudscape-design/components/space-between";
 import ButtonDropdown from "@cloudscape-design/components/button-dropdown";
 import { columnDefinitions, getMatchesCountText, paginationLabels, collectionPreferencesProps } from './table-config';
 import { Amplify, API, graphqlOperation } from 'aws-amplify'
-import { listTeams } from "../../graphql/queries";
+import { listInputGoals } from "../../graphql/queries";
 import { ProjectSampleForm } from '../../ui-components';
 import { createPlan } from '../../graphql/mutations'
 import Form from "@cloudscape-design/components/form";
 import FormField from "@cloudscape-design/components/form-field";
 import Input from "@cloudscape-design/components/input";
-import PlanForm from './teamform';
+import PlanForm from './inputgoalform';
 function EmptyState({ title, subtitle, action }) {
     return (
         <Box textAlign="center" color="inherit">
@@ -35,17 +35,17 @@ function EmptyState({ title, subtitle, action }) {
     );
 }
 
-function TeamList() {
+function InputGoalList() {
     const [allItems, setAllItems] = useState([]);
     const [showForm, setShowForm] = useState(false);
 
     //const [selectedItems, setSelectedItems] = useState([]);
-    const [preferences, setPreferences] = useState({ pageSize: 10, visibleContent: ['id', 'name', 'description', 'headcount', 'organizationID', 'lastUpdated'] });
+    const [preferences, setPreferences] = useState({ pageSize: 10, visibleContent: ['id', 'title', 'description', 'status', 'class', 'start', 'end', 'lastModified'] });
     const { items, actions, filteredItemsCount, collectionProps, filterProps, paginationProps } = useCollection(
         allItems,
         {
             filtering: {
-                empty: <EmptyState title="No Themes" action={<Button onClick={() => setShowForm(true)} >Create Team</Button>} />,
+                empty: <EmptyState title="No Themes" action={<Button onClick={() => setShowForm(true)} >Create InputGoal</Button>} />,
                 noMatch: (
                     <EmptyState
                         title="No matches"
@@ -62,11 +62,11 @@ function TeamList() {
     const { selectedItems } = collectionProps;
     const load = async () => {
         const res = await API.graphql({
-            query: listTeams
+            query: listInputGoals
         });
-        console.log(res.data.listTeams);
+        console.log(res.data.listInputGoals);
 
-        setAllItems(res.data.listTeams.items);
+        setAllItems(res.data.listInputGoals.items);
     };
     useEffect(() => {
         load();
@@ -88,12 +88,12 @@ function TeamList() {
 
 
                                 <Button variant="primary" onClick={() => setShowForm(true)}>
-                                    Create Team
+                                    Create InputGoal
                                 </Button>
                             </SpaceBetween>
                         }
                     >
-                        Teams
+                        Input Goals
                     </Header>
                 }
                 columnDefinitions={columnDefinitions}
@@ -130,4 +130,4 @@ function TeamList() {
     );
 
 }
-export default TeamList;
+export default InputGoalList;
