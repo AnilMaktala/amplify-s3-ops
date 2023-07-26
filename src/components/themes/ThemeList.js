@@ -14,13 +14,13 @@ import SpaceBetween from "@cloudscape-design/components/space-between";
 import ButtonDropdown from "@cloudscape-design/components/button-dropdown";
 import { columnDefinitions, getMatchesCountText, paginationLabels, collectionPreferencesProps } from './table-config';
 import { Amplify, API, graphqlOperation } from 'aws-amplify'
-import { listInitiatives } from "../../graphql/queries";
+import { listThemes } from "../../graphql/queries";
 import { ProjectSampleForm } from '../../ui-components';
 import { createProject } from '../../graphql/mutations'
 import Form from "@cloudscape-design/components/form";
 import FormField from "@cloudscape-design/components/form-field";
 import Input from "@cloudscape-design/components/input";
-import InitiativeForm from './InitiativeForm';
+import ThemeForm from './ThemeForm';
 function EmptyState({ title, subtitle, action }) {
     return (
         <Box textAlign="center" color="inherit">
@@ -35,17 +35,17 @@ function EmptyState({ title, subtitle, action }) {
     );
 }
 
-function InitiativeList() {
+function ThemeList() {
     const [allItems, setAllItems] = useState([]);
     const [showForm, setShowForm] = useState(false);
 
     //const [selectedItems, setSelectedItems] = useState([]);
-    const [preferences, setPreferences] = useState({ pageSize: 10, visibleContent: ['id', 'title', 'description', 'rank', 'lastUpdated'] });
+    const [preferences, setPreferences] = useState({ pageSize: 10, visibleContent: ['id', 'title', 'description', 'planID', 'lastUpdated'] });
     const { items, actions, filteredItemsCount, collectionProps, filterProps, paginationProps } = useCollection(
         allItems,
         {
             filtering: {
-                empty: <EmptyState title="No intiatives" action={<Button>Create Initiative</Button>} />,
+                empty: <EmptyState title="No Themes" action={<Button>Create Theme</Button>} />,
                 noMatch: (
                     <EmptyState
                         title="No matches"
@@ -61,12 +61,12 @@ function InitiativeList() {
 
     const { selectedItems } = collectionProps;
     const load = async () => {
-        const todoData = await API.graphql({
-            query: listInitiatives
+        const res = await API.graphql({
+            query: listThemes
         });
-        console.log(todoData.data.listInitiatives);
+        console.log(res.data.listThemes);
         // const items = JSON.parse(todoData.listProjects.items);
-        setAllItems(todoData.data.listInitiatives.items);
+        setAllItems(res.data.listThemes.items);
     };
     useEffect(() => {
         load();
@@ -86,16 +86,14 @@ function InitiativeList() {
                             >
 
 
-                                <Button variant="primary" onClick={() => setShowForm(true)}>
-                                    Create Initiative
-                                </Button>
+
                                 <Button variant="primary" onClick={() => setShowForm(true)}>
                                     Create Theme
                                 </Button>
                             </SpaceBetween>
                         }
                     >
-                        Initiatives
+                        Themes
                     </Header>
                 }
                 columnDefinitions={columnDefinitions}
@@ -106,7 +104,7 @@ function InitiativeList() {
                     <TextFilter
                         {...filterProps}
                         countText={getMatchesCountText(filteredItemsCount)}
-                        filteringAriaLabel="Filter intiatives"
+                        filteringAriaLabel="Filter Themes"
                     />
                 }
                 preferences={
@@ -122,7 +120,7 @@ function InitiativeList() {
                     <Container
                     >
                         <SpaceBetween direction="vertical" size="l">
-                            <InitiativeForm />
+                            <ThemeForm />
 
                         </SpaceBetween>
                     </Container>
@@ -132,4 +130,4 @@ function InitiativeList() {
     );
 
 }
-export default InitiativeList;
+export default ThemeList;

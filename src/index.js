@@ -8,7 +8,11 @@ import "@aws-amplify/ui-react/styles.css"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Projects from './components/Projects/Projects';
 import Initiatives from './components/Initiatives/Initiatives';
-import awsExports from "./aws-exports"
+import Themes from './components/themes/Themes';
+import Plans from './components/plans/plans';
+import awsExports from "./aws-exports";
+import Organizations from './components/organizations/organizations';
+import Teams from './components/teams/teams';
 Amplify.configure(awsExports)
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -17,6 +21,10 @@ root.render(
       <Route path="/" element={<App />}>
         <Route path="projects" element={<Projects />} />
         <Route path="initiatives" element={<Initiatives />} />
+        <Route path="themes" element={<Themes />} />
+        <Route path="plans" element={<Plans />} />
+        <Route path="organizations" element={<Organizations />} />
+        <Route path="teams" element={<Teams />} />
       </Route>
     </Routes>
   </BrowserRouter>

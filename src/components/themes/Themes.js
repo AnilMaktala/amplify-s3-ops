@@ -5,8 +5,8 @@ import ProjectForm from '../../forms/project-form';
 import { ProjectSampleForm } from '../../ui-components';
 import { Amplify, API, graphqlOperation } from 'aws-amplify'
 import { createProject } from '../../graphql/mutations'
-import InitiativeList from '../InitiativeList/InitiativeList'
-function Initiatives() {
+import ThemeList from './ThemeList';
+function Themes() {
 
    const [title, setTitle] = useState("");
    const [description, setDescription] = useState("");
@@ -19,10 +19,10 @@ function Initiatives() {
 
       <>
 
-         <InitiativeList />
+         <ThemeList />
       </>
    );
 }
 
 
-export default Initiatives;
+export default Themes;

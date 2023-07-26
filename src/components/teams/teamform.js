@@ -16,43 +16,51 @@ import {
 } from '@cloudscape-design/components';
 import SpaceBetween from "@cloudscape-design/components/space-between";
 import { Amplify, API, graphqlOperation } from 'aws-amplify'
-import { createInitiative } from '../../graphql/mutations'
-
-function IntiativeForm() {
-    const [title, setTitle] = useState("");
+import { createTeam } from '../../graphql/mutations'
+import { listOrganizations } from "../../graphql/queries";
+function TeamForm() {
+    const [name, setName] = useState("");
     const [description, setDescription] = useState("");
-    const [rank, setRank] = useState("");
-    const [themeID, setThemeID] = useState("");
-    const [planID, setPlanID] = useState(1);
-    const [status, setStatus] = useState(2);
+    const [headcount, setHeadcount] = useState();
+    const [
+        selectedOrg,
+        setSelectedOrg
+    ] = React.useState({ label: "select Plan", value: "0" });
+    const [organizations, setOrganizations] = useState([]);
     const [state, setState] = useState({
-        title: "intiative2",
-        description: "intiative2",
-        rank: 3,
-        themeID: 2,
-        planID: 2,
-        status: "ACTIVE"
-
+        name: "",
+        description: "",
+        headcount: 0,
+        organizationID: 0
 
     });
     function handleChange() {
-        // const name = evt.target.name;
-
-        // const value =
-        //     evt.target.type === "checkbox" ? evt.target.checked : evt.target.value;
-        // setState({
-        //     ...state,
-        //     [name]: evt.target.value
-        // })
-
-        state.title = title;
+        state.name = name;
         state.description = description;
-        state.rank = rank;
-        // state.themeID = themeID;
-        // state.planID = planID;
-        // state.status = status;
-
+        state.headcount = headcount;
+        state.organizationID = selectedOrg.value;
     };
+    const loadOrgs = async () => {
+        const res = await API.graphql({
+            query: listOrganizations
+        });
+        console.log(res.data.listOrganizations);
+        res.data.listOrganizations.items.forEach((value) => {
+            organizations.push({
+                key: value.id,
+                value: value.name,
+            });
+        });
+        // Update the options state
+        setOrganizations([
+            { key: 'Select a Organization', value: '' },
+            ...organizations
+        ])
+        //setAllItems(res.data.listPlans.items);
+    };
+    useEffect(() => {
+        loadOrgs();
+    }, []);
 
     return (
 
@@ -62,7 +70,7 @@ function IntiativeForm() {
 
             try {
                 handleChange();
-                const response = API.graphql(graphqlOperation(createInitiative, { input: state }));
+                const response = API.graphql(graphqlOperation(createTeam, { input: state }));
                 //setShowForm(false);
                 //load();
             } catch {
@@ -85,15 +93,15 @@ function IntiativeForm() {
                 <Container
                     header={
                         <Header variant="h2">
-                            Add Initiative
+                            Add Team
                         </Header>
                     }
                 >
                     <SpaceBetween direction="vertical" size="l">
-                        <FormField label="Title">
-                            <Input type="text" name="title"
-                                value={title}
-                                onChange={({ detail }) => { setTitle(detail.value); }}
+                        <FormField label="Name">
+                            <Input type="text" name="name"
+                                value={name}
+                                onChange={({ detail }) => { setName(detail.value); }}
                             />
                         </FormField>
                         <FormField label="Description">
@@ -101,25 +109,24 @@ function IntiativeForm() {
                                 onChange={({ detail }) => { setDescription(detail.value); }}
                             />
                         </FormField>
-                        <FormField label="Rank">
-                            <Input type="text" name="rank" value={rank}
-                                onChange={({ detail }) => { setRank(detail.value); }}
+                        <FormField label="Headcount">
+                            <Input type="text" name="headcount" value={headcount}
+                                onChange={({ detail }) => { setHeadcount(detail.value); }}
                             />
                         </FormField>
                         <FormField
-                            label="Theme"
-                            secondaryControl={<Button iconName="refresh" />}
+                            label="Organization"
+                            secondaryControl={<Button onClick="loadOrgs" iconName="refresh" />}
                         >
                             <Select
-                                options={[
-                                    { label: "sg-00dcd368", id: "1" },
-                                    { label: "sg-02dcd36a", id: "2" },
-                                    { label: "sg-04dcd36c", id: "3" },
-                                    { label: "sg-05fa4668", id: "4" },
-                                    { label: "sg-064a9062", id: "5" }
-                                ]}
+                                selectedOption={selectedOrg}
+                                onChange={({ detail }) =>
+                                    setSelectedOrg(detail.selectedOption)
+                                }
+                                options={organizations}
                             />
                         </FormField>
+
                     </SpaceBetween>
                 </Container>
             </Form>
@@ -127,4 +134,4 @@ function IntiativeForm() {
     );
 }
 
-export default IntiativeForm;
+export default TeamForm;
