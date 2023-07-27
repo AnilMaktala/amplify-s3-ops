@@ -52,7 +52,7 @@ type Project @model @auth(rules: [{ allow: public }]) {
   Sponsor: Person @hasOne
   Initiative: Initiative @hasOne
 }
-#
+
 type Team @model @auth(rules: [{ allow: public }]) {
   id: ID!
   name: String!
