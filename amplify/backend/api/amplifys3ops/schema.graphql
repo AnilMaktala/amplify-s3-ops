@@ -4,7 +4,7 @@ enum Bucket {
   CUT
 }
 
-type OutputGoal @model @auth(rules: [{allow: public}]) {
+type OutputGoal @model @auth(rules: [{ allow: public }]) {
   id: ID!
   title: String!
   description: String!
@@ -23,7 +23,7 @@ enum Goal {
   TEAM
 }
 
-type InputGoal @model @auth(rules: [{allow: public}]) {
+type InputGoal @model @auth(rules: [{ allow: public }]) {
   id: ID!
   title: String!
   description: String!
@@ -41,7 +41,7 @@ enum Funding {
   CUT
 }
 
-type Project @model @auth(rules: [{allow: public}]) {
+type Project @model @auth(rules: [{ allow: public }]) {
   id: ID!
   title: String!
   description: String
@@ -52,8 +52,8 @@ type Project @model @auth(rules: [{allow: public}]) {
   Sponsor: Person @hasOne
   Initiative: Initiative @hasOne
 }
-
-type Team @model @auth(rules: [{allow: public}]) {
+#
+type Team @model @auth(rules: [{ allow: public }]) {
   id: ID!
   name: String!
   description: String
@@ -63,21 +63,22 @@ type Team @model @auth(rules: [{allow: public}]) {
   InputGoal: InputGoal @hasOne
 }
 
-type Person @model @auth(rules: [{allow: public}]) {
+type Person @model @auth(rules: [{ allow: public }]) {
   id: ID!
   alias: String!
   name: String!
   email: String
 }
 
-type Organization @model @auth(rules: [{allow: public}]) {
+type Organization @model @auth(rules: [{ allow: public }]) {
   id: ID!
   name: String!
   description: String
   headcount: Int!
   Teams: [Team] @hasMany(indexName: "byOrganization", fields: ["id"])
   Manager: Person @hasOne
-  OutputGoals: [OutputGoal] @hasMany(indexName: "byOrganization", fields: ["id"])
+  OutputGoals: [OutputGoal]
+    @hasMany(indexName: "byOrganization", fields: ["id"])
   planID: ID! @index(name: "byPlan")
 }
 
@@ -87,7 +88,7 @@ enum Status {
   CANCELLED
 }
 
-type Initiative @model @auth(rules: [{allow: public}]) {
+type Initiative @model @auth(rules: [{ allow: public }]) {
   id: ID!
   title: String!
   description: String
@@ -99,7 +100,7 @@ type Initiative @model @auth(rules: [{allow: public}]) {
   bucket: Bucket
 }
 
-type Theme @model @auth(rules: [{allow: public}]) {
+type Theme @model @auth(rules: [{ allow: public }]) {
   id: ID!
   title: String!
   description: String
@@ -107,7 +108,7 @@ type Theme @model @auth(rules: [{allow: public}]) {
   Initiatives: [Initiative] @hasMany(indexName: "byTheme", fields: ["id"])
 }
 
-type Plan @model @auth(rules: [{allow: public}]) {
+type Plan @model @auth(rules: [{ allow: public }]) {
   id: ID!
   title: String!
   description: String
@@ -116,4 +117,3 @@ type Plan @model @auth(rules: [{allow: public}]) {
   Initiatives: [Initiative] @hasMany(indexName: "byPlan", fields: ["id"])
   Organizations: [Organization] @hasMany(indexName: "byPlan", fields: ["id"])
 }
- 

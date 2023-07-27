@@ -64,6 +64,43 @@ export const listOutputGoals = /* GraphQL */ `
     }
   }
 `;
+export const outputGoalsByOrganizationID = /* GraphQL */ `
+  query OutputGoalsByOrganizationID(
+    $organizationID: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelOutputGoalFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    outputGoalsByOrganizationID(
+      organizationID: $organizationID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        title
+        description
+        status
+        class
+        start
+        end
+        organizationID
+        InputGoals {
+          nextToken
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
 export const getInputGoal = /* GraphQL */ `
   query GetInputGoal($id: ID!) {
     getInputGoal(id: $id) {
@@ -88,6 +125,39 @@ export const listInputGoals = /* GraphQL */ `
     $nextToken: String
   ) {
     listInputGoals(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        title
+        description
+        status
+        class
+        start
+        end
+        outputgoalID
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const inputGoalsByOutputgoalID = /* GraphQL */ `
+  query InputGoalsByOutputgoalID(
+    $outputgoalID: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelInputGoalFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    inputGoalsByOutputgoalID(
+      outputgoalID: $outputgoalID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
       items {
         id
         title
@@ -307,6 +377,60 @@ export const listTeams = /* GraphQL */ `
     }
   }
 `;
+export const teamsByOrganizationID = /* GraphQL */ `
+  query TeamsByOrganizationID(
+    $organizationID: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelTeamFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    teamsByOrganizationID(
+      organizationID: $organizationID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        name
+        description
+        headcount
+        organizationID
+        Manager {
+          id
+          alias
+          name
+          email
+          createdAt
+          updatedAt
+          __typename
+        }
+        InputGoal {
+          id
+          title
+          description
+          status
+          class
+          start
+          end
+          outputgoalID
+          createdAt
+          updatedAt
+          __typename
+        }
+        createdAt
+        updatedAt
+        teamManagerId
+        teamInputGoalId
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
 export const getPerson = /* GraphQL */ `
   query GetPerson($id: ID!) {
     getPerson(id: $id) {
@@ -438,6 +562,54 @@ export const listOrganizations = /* GraphQL */ `
     }
   }
 `;
+export const organizationsByPlanID = /* GraphQL */ `
+  query OrganizationsByPlanID(
+    $planID: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelOrganizationFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    organizationsByPlanID(
+      planID: $planID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        name
+        description
+        headcount
+        Teams {
+          nextToken
+          __typename
+        }
+        Manager {
+          id
+          alias
+          name
+          email
+          createdAt
+          updatedAt
+          __typename
+        }
+        OutputGoals {
+          nextToken
+          __typename
+        }
+        planID
+        createdAt
+        updatedAt
+        organizationManagerId
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
 export const getInitiative = /* GraphQL */ `
   query GetInitiative($id: ID!) {
     getInitiative(id: $id) {
@@ -472,6 +644,92 @@ export const listInitiatives = /* GraphQL */ `
     $nextToken: String
   ) {
     listInitiatives(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        title
+        description
+        rank
+        themeID
+        planID
+        status
+        Sponsor {
+          id
+          alias
+          name
+          email
+          createdAt
+          updatedAt
+          __typename
+        }
+        bucket
+        createdAt
+        updatedAt
+        initiativeSponsorId
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const initiativesByThemeID = /* GraphQL */ `
+  query InitiativesByThemeID(
+    $themeID: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelInitiativeFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    initiativesByThemeID(
+      themeID: $themeID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        title
+        description
+        rank
+        themeID
+        planID
+        status
+        Sponsor {
+          id
+          alias
+          name
+          email
+          createdAt
+          updatedAt
+          __typename
+        }
+        bucket
+        createdAt
+        updatedAt
+        initiativeSponsorId
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const initiativesByPlanID = /* GraphQL */ `
+  query InitiativesByPlanID(
+    $planID: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelInitiativeFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    initiativesByPlanID(
+      planID: $planID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
       items {
         id
         title
@@ -538,6 +796,39 @@ export const listThemes = /* GraphQL */ `
     $nextToken: String
   ) {
     listThemes(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        title
+        description
+        planID
+        Initiatives {
+          nextToken
+          __typename
+        }
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const themesByPlanID = /* GraphQL */ `
+  query ThemesByPlanID(
+    $planID: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelThemeFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    themesByPlanID(
+      planID: $planID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
       items {
         id
         title
@@ -636,297 +927,6 @@ export const listPlans = /* GraphQL */ `
           __typename
         }
         Organizations {
-          nextToken
-          __typename
-        }
-        createdAt
-        updatedAt
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
-export const outputGoalsByOrganizationID = /* GraphQL */ `
-  query OutputGoalsByOrganizationID(
-    $organizationID: ID!
-    $sortDirection: ModelSortDirection
-    $filter: ModelOutputGoalFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    outputGoalsByOrganizationID(
-      organizationID: $organizationID
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        title
-        description
-        status
-        class
-        start
-        end
-        organizationID
-        InputGoals {
-          nextToken
-          __typename
-        }
-        createdAt
-        updatedAt
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
-export const inputGoalsByOutputgoalID = /* GraphQL */ `
-  query InputGoalsByOutputgoalID(
-    $outputgoalID: ID!
-    $sortDirection: ModelSortDirection
-    $filter: ModelInputGoalFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    inputGoalsByOutputgoalID(
-      outputgoalID: $outputgoalID
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        title
-        description
-        status
-        class
-        start
-        end
-        outputgoalID
-        createdAt
-        updatedAt
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
-export const teamsByOrganizationID = /* GraphQL */ `
-  query TeamsByOrganizationID(
-    $organizationID: ID!
-    $sortDirection: ModelSortDirection
-    $filter: ModelTeamFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    teamsByOrganizationID(
-      organizationID: $organizationID
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        name
-        description
-        headcount
-        organizationID
-        Manager {
-          id
-          alias
-          name
-          email
-          createdAt
-          updatedAt
-          __typename
-        }
-        InputGoal {
-          id
-          title
-          description
-          status
-          class
-          start
-          end
-          outputgoalID
-          createdAt
-          updatedAt
-          __typename
-        }
-        createdAt
-        updatedAt
-        teamManagerId
-        teamInputGoalId
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
-export const organizationsByPlanID = /* GraphQL */ `
-  query OrganizationsByPlanID(
-    $planID: ID!
-    $sortDirection: ModelSortDirection
-    $filter: ModelOrganizationFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    organizationsByPlanID(
-      planID: $planID
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        name
-        description
-        headcount
-        Teams {
-          nextToken
-          __typename
-        }
-        Manager {
-          id
-          alias
-          name
-          email
-          createdAt
-          updatedAt
-          __typename
-        }
-        OutputGoals {
-          nextToken
-          __typename
-        }
-        planID
-        createdAt
-        updatedAt
-        organizationManagerId
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
-export const initiativesByThemeID = /* GraphQL */ `
-  query InitiativesByThemeID(
-    $themeID: ID!
-    $sortDirection: ModelSortDirection
-    $filter: ModelInitiativeFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    initiativesByThemeID(
-      themeID: $themeID
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        title
-        description
-        rank
-        themeID
-        planID
-        status
-        Sponsor {
-          id
-          alias
-          name
-          email
-          createdAt
-          updatedAt
-          __typename
-        }
-        bucket
-        createdAt
-        updatedAt
-        initiativeSponsorId
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
-export const initiativesByPlanID = /* GraphQL */ `
-  query InitiativesByPlanID(
-    $planID: ID!
-    $sortDirection: ModelSortDirection
-    $filter: ModelInitiativeFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    initiativesByPlanID(
-      planID: $planID
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        title
-        description
-        rank
-        themeID
-        planID
-        status
-        Sponsor {
-          id
-          alias
-          name
-          email
-          createdAt
-          updatedAt
-          __typename
-        }
-        bucket
-        createdAt
-        updatedAt
-        initiativeSponsorId
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
-export const themesByPlanID = /* GraphQL */ `
-  query ThemesByPlanID(
-    $planID: ID!
-    $sortDirection: ModelSortDirection
-    $filter: ModelThemeFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    themesByPlanID(
-      planID: $planID
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        title
-        description
-        planID
-        Initiatives {
           nextToken
           __typename
         }
