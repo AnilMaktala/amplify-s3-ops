@@ -39,3 +39,4 @@ export { default as Features2x2 } from "./Features2x2";
 export { default as studioTheme } from "./studioTheme";
 export { default as ProjectsForm1 } from "./ProjectsForm1";
 export { default as SampleForm } from "./SampleForm";
+export { default as ProjectSampleForm } from "./ProjectSampleForm";
