@@ -14,13 +14,13 @@ import SpaceBetween from "@cloudscape-design/components/space-between";
 import ButtonDropdown from "@cloudscape-design/components/button-dropdown";
 import { columnDefinitions, getMatchesCountText, paginationLabels, collectionPreferencesProps } from './table-config';
 import { Amplify, API, graphqlOperation } from 'aws-amplify'
-import { listInputGoals } from "../../graphql/queries";
+import { listOutputGoals } from "../../graphql/queries";
 import { ProjectSampleForm } from '../../ui-components';
 import { createPlan } from '../../graphql/mutations'
 import Form from "@cloudscape-design/components/form";
 import FormField from "@cloudscape-design/components/form-field";
 import Input from "@cloudscape-design/components/input";
-import PlanForm from './inputgoalform';
+import InputFrom from './outputgoalform';
 function EmptyState({ title, subtitle, action }) {
     return (
         <Box textAlign="center" color="inherit">
@@ -35,7 +35,7 @@ function EmptyState({ title, subtitle, action }) {
     );
 }
 
-function InputGoalList() {
+function OutputGoalList() {
     const [allItems, setAllItems] = useState([]);
     const [showForm, setShowForm] = useState(false);
 
@@ -45,7 +45,7 @@ function InputGoalList() {
         allItems,
         {
             filtering: {
-                empty: <EmptyState title="No Themes" action={<Button onClick={() => setShowForm(true)} >Create InputGoal</Button>} />,
+                empty: <EmptyState title="No Themes" action={<Button onClick={() => setShowForm(true)} >Create OutputGoal</Button>} />,
                 noMatch: (
                     <EmptyState
                         title="No matches"
@@ -59,17 +59,18 @@ function InputGoalList() {
         }
     );
 
-    const { selectedItems } = collectionProps;
     function trigger() {
         load();
     }
+
+    const { selectedItems } = collectionProps;
     const load = async () => {
         const res = await API.graphql({
-            query: listInputGoals
+            query: listOutputGoals
         });
-        console.log(res.data.listInputGoals);
+        console.log(res.data.listOutputGoals);
 
-        setAllItems(res.data.listInputGoals.items);
+        setAllItems(res.data.listOutputGoals.items);
     };
     useEffect(() => {
         load();
@@ -91,12 +92,12 @@ function InputGoalList() {
 
 
                                 <Button variant="primary" onClick={() => setShowForm(true)}>
-                                    Create InputGoal
+                                    Create OutputGoal
                                 </Button>
                             </SpaceBetween>
                         }
                     >
-                        Input Goals
+                        Output Goals
                     </Header>
                 }
                 columnDefinitions={columnDefinitions}
@@ -123,7 +124,7 @@ function InputGoalList() {
                     <Container
                     >
                         <SpaceBetween direction="vertical" size="l">
-                            <PlanForm setShowForm={setShowForm} trigger={trigger} />
+                            <InputFrom trigger={trigger} setShowForm={setShowForm} />
 
                         </SpaceBetween>
                     </Container>
@@ -133,4 +134,4 @@ function InputGoalList() {
     );
 
 }
-export default InputGoalList;
+export default OutputGoalList;

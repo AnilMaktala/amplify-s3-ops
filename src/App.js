@@ -1,3 +1,4 @@
+import { Amplify } from 'aws-amplify';
 import logo from './logo.svg';
 import './App.css';
 import Navbar from './Navbar';
@@ -6,11 +7,18 @@ import { withAuthenticator } from '@aws-amplify/ui-react';
 import { Link, Outlet } from "react-router-dom";
 
 import TopNavigation from "@cloudscape-design/components/top-navigation";
+import awsExports from './aws-exports';
+Amplify.configure(awsExports);
 function App({ signOut, user }) {
+  const username = user.attributes.email;
+  console.log(username);
+  function onClick() {
+    signOut();
+  }
   return (
     <div className="App">
       {/* <NavBarHeader2 width="100%" /> */}
-      <TopNavigation
+      <TopNavigation username={username}
         identity={{
           href: "#",
           title: "Operations",
@@ -64,28 +72,22 @@ function App({ signOut, user }) {
             externalIconAriaLabel: " (opens in a new tab)"
           },
           {
-            type: "button",
-            iconName: "notification",
-            title: "Notifications",
-            ariaLabel: "Notifications (unread)",
-            badge: true,
-            disableUtilityCollapse: false
-          },
-          {
             type: "menu-dropdown",
             text: "Goals",
             ariaLabel: "Goals",
             title: "Goals",
             items: [
               {
-                id: "settings-org",
+                id: "inputgoal",
                 text: "Input Goal",
                 href: "./inputgoal",
                 external: false,
               },
               {
-                id: "settings-project",
-                text: "Output Goal"
+                id: "outputgoal",
+                text: "Output Goal",
+                href: "./outputgoal",
+                external: false,
               }
             ]
           },
@@ -107,12 +109,12 @@ function App({ signOut, user }) {
           },
           {
             type: "menu-dropdown",
-            text: "{ user }",
+            text: "{  }",
             description: "email@example.com",
             iconName: "user-profile",
             items: [
               { id: "profile", text: "Profile" },
-              { id: "preferences", text: "Preferences" },
+              { id: "preferences", text: "Prefezrences" },
               { id: "security", text: "Security" },
               {
                 id: "support-group",
@@ -137,7 +139,7 @@ function App({ signOut, user }) {
                   }
                 ]
               },
-              { id: "signout", text: "Sign out", }
+              { id: "signout", onItemClick: signOut, text: "Sign out" }
             ]
           }
         ]}

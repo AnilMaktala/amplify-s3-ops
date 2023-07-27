@@ -17,9 +17,10 @@ import {
 } from '@cloudscape-design/components';
 import SpaceBetween from "@cloudscape-design/components/space-between";
 import { Amplify, API, graphqlOperation } from 'aws-amplify'
-import { createInputGoal } from '../../graphql/mutations'
+import { createOutputGoal } from '../../graphql/mutations'
 import { listOrganizations } from "../../graphql/queries";
-function InputGoalForm({ setShowForm, trigger }) {
+
+function OutputGoalForm({ trigger, setShowForm }) {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [headcount, setHeadcount] = useState();
@@ -31,7 +32,11 @@ function InputGoalForm({ setShowForm, trigger }) {
         selectedClass,
         setSelectedClass
     ] = React.useState({ label: "select class", value: "0" });
-
+    const [
+        selectedOrg,
+        setSelectedOrg
+    ] = React.useState({ label: "select Plan", value: "0" });
+    const [organizations, setOrganizations] = useState([]);
 
     const [startDate, setStartDate] = React.useState("");
     const [endDate, setEndDate] = React.useState("");
@@ -43,7 +48,7 @@ function InputGoalForm({ setShowForm, trigger }) {
         class: "",
         start: "",
         end: "",
-        outputgoalID: 0
+        organizationID: 0
 
     });
     function handleChange() {
@@ -53,28 +58,31 @@ function InputGoalForm({ setShowForm, trigger }) {
         state.class = selectedClass.id;
         state.start = startDate;
         state.end = endDate;
+        state.organizationID = selectedOrg.value;
     };
-    // const loadOrgs = async () => {
-    //     const res = await API.graphql({
-    //         query: listOrganizations
-    //     });
-    //     console.log(res.data.listOrganizations);
-    //     res.data.listOrganizations.items.forEach((value) => {
-    //         organizations.push({
-    //             key: value.id,
-    //             value: value.name,
-    //         });
-    //     });
-    //     // Update the options state
-    //     setOrganizations([
-    //         { key: 'Select a Organization', value: '' },
-    //         ...organizations
-    //     ])
-    //     //setAllItems(res.data.listPlans.items);
-    // };
+    const loadOrgs = async () => {
+        const res = await API.graphql({
+            query: listOrganizations
+        });
+        console.log(res.data.listOrganizations);
+        res.data.listOrganizations.items.forEach((value) => {
+            organizations.push({
+                key: value.id,
+                value: value.name,
+            });
+        });
+        // Update the options state
+        setOrganizations([
+            { key: 'Select a Organization', value: '' },
+            ...organizations
+        ])
+        //setAllItems(res.data.listPlans.items);
+    };
     useEffect(() => {
-        // loadOrgs();
-    }, []);
+        if (trigger) {
+            loadOrgs();
+        }
+    }, [trigger]);
 
     return (
 
@@ -84,9 +92,10 @@ function InputGoalForm({ setShowForm, trigger }) {
 
             try {
                 handleChange();
-                const response = API.graphql(graphqlOperation(createInputGoal, { input: state }));
-                setShowForm(false);
+                const response = API.graphql(graphqlOperation(createOutputGoal, { input: state }));
                 trigger();
+                setShowForm(false);
+                //load();
             } catch {
                 console.log("error");
             }
@@ -107,7 +116,7 @@ function InputGoalForm({ setShowForm, trigger }) {
                 <Container
                     header={
                         <Header variant="h2">
-                            Add InputGoal
+                            Add OuputGoal
                         </Header>
                     }
                 >
@@ -154,6 +163,7 @@ function InputGoalForm({ setShowForm, trigger }) {
                                 ]}
                             />
                         </FormField>
+
                         <FormField
                             label="Start Date"
                             constraintText="Use YYYY/MM/DD format."
@@ -174,7 +184,7 @@ function InputGoalForm({ setShowForm, trigger }) {
                                 placeholder="YYYY/MM/DD"
                             />
                         </FormField>
-                        {/* <FormField
+                        <FormField
                             label="Organization"
                             secondaryControl={<Button onClick="loadOrgs" iconName="refresh" />}
                         >
@@ -185,7 +195,7 @@ function InputGoalForm({ setShowForm, trigger }) {
                                 }
                                 options={organizations}
                             />
-                        </FormField> */}
+                        </FormField>
 
                     </SpaceBetween>
                 </Container>
@@ -194,4 +204,4 @@ function InputGoalForm({ setShowForm, trigger }) {
     );
 }
 
-export default InputGoalForm;
+export default OutputGoalForm;

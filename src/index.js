@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Amplify } from 'aws-amplify';
 import "@aws-amplify/ui-react/styles.css"
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import Projects from './components/Projects/Projects';
 import Initiatives from './components/Initiatives/Initiatives';
 import Themes from './components/themes/Themes';
@@ -14,6 +14,7 @@ import awsExports from "./aws-exports";
 import Organizations from './components/organizations/organizations';
 import Teams from './components/teams/teams';
 import InputGoal from './components/inputgoal/inputgoal';
+import OutputGoal from './components/outputgoal/outputgoal';
 Amplify.configure(awsExports)
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -27,6 +28,7 @@ root.render(
         <Route path="organizations" element={<Organizations />} />
         <Route path="teams" element={<Teams />} />
         <Route path="inputgoal" element={<InputGoal />} />
+        <Route path="outputgoal" element={<OutputGoal />} />
       </Route>
     </Routes>
   </BrowserRouter>
