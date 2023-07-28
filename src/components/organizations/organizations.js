@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { ProjectsForm1 } from '../../ui-components';
 import ProjectForm from '../../forms/project-form';
-import { ProjectSampleForm } from '../../ui-components';
+
 import { Amplify, API, graphqlOperation } from 'aws-amplify'
 import { createProject } from '../../graphql/mutations'
 import ThemeList from './organizationList';

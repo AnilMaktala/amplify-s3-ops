@@ -75,6 +75,11 @@ function App() {
   function clickMe() {
     console.log('click');
   }
+  const handleUserProfileAction = (event) => {
+    if (event.detail.id === 'signout' && user !== undefined) {
+      Auth.signOut();
+    }
+  };
 
   const utilities = useMemo(() => {
     const menu = []
@@ -83,42 +88,42 @@ function App() {
       menu.push({
         type: "button",
         text: "Projects",
-        href: "./Projects",
+        href: "/projects",
         external: false
       })
     user &&
       menu.push({
         type: "button",
         text: "Initiatives",
-        href: "./Initiatives",
+        href: "/initiatives",
         external: false
       })
     user &&
       menu.push({
         type: "button",
         text: "Themes",
-        href: "./Themes",
+        href: "/themes",
         external: false
       })
     user &&
       menu.push({
         type: "button",
         text: "Plans",
-        href: "./plans",
+        href: "/plans",
         external: false,
       })
     user &&
       menu.push({
         type: "button",
         text: "Organizations",
-        href: "./organizations",
+        href: "/organizations",
         external: false,
       })
     user &&
       menu.push({
         type: "button",
         text: "Teams",
-        href: "./teams",
+        href: "/teams",
         onClick: Auth.signOut,
         external: false,
       })
@@ -149,8 +154,9 @@ function App() {
         text: user.username,
         description: user.email,
         iconName: "user-profile",
-        items: [{ id: "signout", text: "Sign out" }],
-        onItemClick: ''
+        onItemClick: handleUserProfileAction,
+        items: [{ id: "signout", text: "Sign out" }]
+
       })
 
     return menu
@@ -165,7 +171,7 @@ function App() {
       <div>
 
         {user ? (
-          <button onClick={() => Auth.signOut()}>Sign Out</button>
+          <div></div>
         ) : (
           <button onClick={() => Auth.federatedSignIn({ customProvider: "AmazonFederate" })}>Signin With Midway</button>
         )}
