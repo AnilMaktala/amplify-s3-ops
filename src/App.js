@@ -167,7 +167,7 @@ function App() {
         {user ? (
           <button onClick={() => Auth.signOut()}>Sign Out</button>
         ) : (
-          <button onClick={() => Auth.federatedSignIn()}>Federated Sign In</button>
+          <button onClick={() => Auth.federatedSignIn({ customProvider: "AmazonFederate" })}>Signin With Midway</button>
         )}
 
         {user ? (

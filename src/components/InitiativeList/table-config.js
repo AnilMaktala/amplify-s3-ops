@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link } from '@cloudscape-design/components';
+import { Link, Button } from '@cloudscape-design/components';
 
 export function getMatchesCountText(count) {
     return count === 1 ? `1 match` : `${count} matches`;
@@ -48,6 +48,19 @@ export const columnDefinitions = [
         ariaLabel: createLabelFunction('Last modified'),
         sortingComparator: (a, b) => a.lastUpdated.valueOf() - b.lastUpdated.valueOf(),
     },
+    {
+        id: "actions",
+        header: "Actions",
+        cell: item => (
+            <Button
+                variant="inline-link"
+                ariaLabel={`Download ${item.name}`}
+            >
+                Edit
+            </Button>
+        ),
+        minWidth: 170
+    }
 ];
 
 export const paginationLabels = {
