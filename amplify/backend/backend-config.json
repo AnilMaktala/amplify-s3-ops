@@ -23,7 +23,6 @@
     }
   },
   "auth": {
-   
     "amplifys3ops5b20d6cc": {
       "customAuth": false,
       "dependsOn": [],
