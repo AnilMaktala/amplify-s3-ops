@@ -18,7 +18,7 @@ import SpaceBetween from "@cloudscape-design/components/space-between";
 import { Amplify, API, graphqlOperation } from 'aws-amplify'
 import { createOrganization } from '../../graphql/mutations'
 import { listPlans } from "../../graphql/queries";
-function ThemeForm() {
+function ThemeForm({ setShowForm, trigger }) {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [headcount, setHeadcount] = useState();
@@ -71,8 +71,8 @@ function ThemeForm() {
             try {
                 handleChange();
                 const response = API.graphql(graphqlOperation(createOrganization, { input: state }));
-                //setShowForm(false);
-                //load();
+                setShowForm(false);
+                trigger();
             } catch {
                 console.log("error");
             }

@@ -49,5 +49,39 @@
       "providerPlugin": "awscloudformation",
       "service": "Cognito"
     }
+  },
+  "function": {
+    "amplifys3opsa798c525": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput"
+          ],
+          "category": "api",
+          "resourceName": "amplifys3ops"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_amplifys3opsa798c525_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "amplifys3opsa798c525"
+        }
+      ]
+    },
+    "AMPLIFY_function_amplifys3opsa798c525_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "amplifys3opsa798c525"
+        }
+      ]
+    }
   }
 }

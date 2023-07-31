@@ -58,6 +58,9 @@ function TeamList() {
             selection: {},
         }
     );
+    function trigger() {
+        load();
+    }
 
     const { selectedItems } = collectionProps;
     const load = async () => {
@@ -120,7 +123,7 @@ function TeamList() {
                     <Container
                     >
                         <SpaceBetween direction="vertical" size="l">
-                            <PlanForm />
+                            <PlanForm setShowForm={setShowForm} trigger={trigger} />
 
                         </SpaceBetween>
                     </Container>

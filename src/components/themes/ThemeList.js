@@ -60,6 +60,9 @@ function ThemeList() {
     );
 
     const { selectedItems } = collectionProps;
+    function trigger() {
+        load();
+    }
     const load = async () => {
         const res = await API.graphql({
             query: listThemes
@@ -120,7 +123,7 @@ function ThemeList() {
                     <Container
                     >
                         <SpaceBetween direction="vertical" size="l">
-                            <ThemeForm />
+                            <ThemeForm setShowForm={setShowForm} trigger={trigger} />
 
                         </SpaceBetween>
                     </Container>

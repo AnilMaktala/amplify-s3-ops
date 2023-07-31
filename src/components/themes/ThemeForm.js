@@ -19,7 +19,7 @@ import { Amplify, API, graphqlOperation } from 'aws-amplify'
 import { createTheme } from '../../graphql/mutations';
 import { listPlans } from "../../graphql/queries";
 
-function ThemeForm() {
+function ThemeForm({ setShowForm, trigger }) {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [
@@ -70,8 +70,8 @@ function ThemeForm() {
             try {
                 handleChange();
                 const response = API.graphql(graphqlOperation(createTheme, { input: state }));
-                //setShowForm(false);
-                //load();
+                setShowForm(false);
+                trigger();
             } catch {
                 console.log("error");
             }

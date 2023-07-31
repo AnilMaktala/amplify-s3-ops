@@ -68,6 +68,9 @@ function PlanList() {
 
         setAllItems(res.data.listPlans.items);
     };
+    function trigger() {
+        load();
+    }
     useEffect(() => {
         load();
     }, []);
@@ -120,7 +123,7 @@ function PlanList() {
                     <Container
                     >
                         <SpaceBetween direction="vertical" size="l">
-                            <PlanForm />
+                            <PlanForm setShowForm={setShowForm} trigger={trigger}  />
 
                         </SpaceBetween>
                     </Container>

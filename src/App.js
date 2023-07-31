@@ -46,6 +46,7 @@ Amplify.configure(updatedAwsConfig);
 
 function App() {
   const [user, setUser] = useState(null);
+  const [displayName, setDisplayName] = useState("");
   let username = useState(['identity', 'attributes', 'email'])
   useEffect(() => {
     Hub.listen('auth', ({ payload: { event, data } }) => {
@@ -74,6 +75,13 @@ function App() {
   }
   function clickMe() {
     console.log('click');
+  }
+
+  function getDisplayUsername() {
+    if (user) {
+      setDisplayName(user.username.split('_')[1]);
+
+    }
   }
   const handleUserProfileAction = (event) => {
     if (event.detail.id === 'signout' && user !== undefined) {
@@ -151,8 +159,8 @@ function App() {
     user &&
       menu.push({
         type: "menu-dropdown",
-        text: user.username,
-        description: user.email,
+        text: user.username.split('_')[1],
+        description: user.username.split('_')[1],
         iconName: "user-profile",
         onItemClick: handleUserProfileAction,
         items: [{ id: "signout", text: "Sign out" }]

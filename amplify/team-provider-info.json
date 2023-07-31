@@ -17,6 +17,12 @@
       },
       "auth": {
         "amplifys3ops5b20d6cc": {}
+      },
+      "function": {
+        "amplifys3opsa798c525": {
+          "deploymentBucketName": "amplify-amplifys3ops-dev-163321-deployment",
+          "s3Key": "amplify-builds/amplifys3opsa798c525-6673687935786d6d534c-build.zip"
+        }
       }
     }
   }

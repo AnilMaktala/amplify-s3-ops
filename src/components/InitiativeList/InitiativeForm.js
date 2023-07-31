@@ -18,7 +18,7 @@ import SpaceBetween from "@cloudscape-design/components/space-between";
 import { Amplify, API, graphqlOperation } from 'aws-amplify'
 import { createInitiative } from '../../graphql/mutations'
 
-function IntiativeForm() {
+function IntiativeForm({ setShowForm, trigger }) {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [rank, setRank] = useState("");
@@ -63,8 +63,8 @@ function IntiativeForm() {
             try {
                 handleChange();
                 const response = API.graphql(graphqlOperation(createInitiative, { input: state }));
-                //setShowForm(false);
-                //load();
+                setShowForm(false);
+                trigger();
             } catch {
                 console.log("error");
             }

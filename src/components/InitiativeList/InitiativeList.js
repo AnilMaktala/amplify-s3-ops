@@ -60,6 +60,9 @@ function InitiativeList() {
     );
 
     const { selectedItems } = collectionProps;
+    function trigger() {
+        load();
+    }
     const load = async () => {
         const todoData = await API.graphql({
             query: listInitiatives
@@ -122,7 +125,7 @@ function InitiativeList() {
                     <Container
                     >
                         <SpaceBetween direction="vertical" size="l">
-                            <InitiativeForm />
+                            <InitiativeForm setShowForm={setShowForm} trigger={trigger} />
 
                         </SpaceBetween>
                     </Container>

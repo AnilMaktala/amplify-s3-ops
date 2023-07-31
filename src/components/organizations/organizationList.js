@@ -58,7 +58,9 @@ function PlanList() {
             selection: {},
         }
     );
-
+    function trigger() {
+        load();
+    }
     const { selectedItems } = collectionProps;
     const load = async () => {
         const res = await API.graphql({
@@ -120,7 +122,7 @@ function PlanList() {
                     <Container
                     >
                         <SpaceBetween direction="vertical" size="l">
-                            <PlanForm />
+                            <PlanForm setShowForm={setShowForm} trigger={trigger} />
 
                         </SpaceBetween>
                     </Container>
