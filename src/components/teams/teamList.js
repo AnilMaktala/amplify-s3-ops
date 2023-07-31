@@ -40,7 +40,7 @@ function TeamList() {
     const [showForm, setShowForm] = useState(false);
 
     //const [selectedItems, setSelectedItems] = useState([]);
-    const [preferences, setPreferences] = useState({ pageSize: 10, visibleContent: ['id', 'name', 'description', 'headcount', 'organizationID', 'lastUpdated'] });
+    const [preferences, setPreferences] = useState({ pageSize: 10, visibleContent: ['id', 'name', 'description', 'headcount', 'organizationID', 'createdAt', 'updatedAt'] });
     const { items, actions, filteredItemsCount, collectionProps, filterProps, paginationProps } = useCollection(
         allItems,
         {

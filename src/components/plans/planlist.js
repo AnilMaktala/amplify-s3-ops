@@ -40,7 +40,7 @@ function PlanList() {
     const [showForm, setShowForm] = useState(false);
 
     //const [selectedItems, setSelectedItems] = useState([]);
-    const [preferences, setPreferences] = useState({ pageSize: 10, visibleContent: ['id', 'title', 'description', 'rank', 'lastUpdated'] });
+    const [preferences, setPreferences] = useState({ pageSize: 10, visibleContent: ['id', 'title', 'description', 'rank', 'createdAt', 'updatedAt'] });
     const { items, actions, filteredItemsCount, collectionProps, filterProps, paginationProps } = useCollection(
         allItems,
         {
@@ -123,7 +123,7 @@ function PlanList() {
                     <Container
                     >
                         <SpaceBetween direction="vertical" size="l">
-                            <PlanForm setShowForm={setShowForm} trigger={trigger}  />
+                            <PlanForm setShowForm={setShowForm} trigger={trigger} />
 
                         </SpaceBetween>
                     </Container>

@@ -6,11 +6,9 @@ export function getMatchesCountText(count) {
 }
 
 function formatDate(date) {
-    const dateFormatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long' });
-    const timeFormatter = new Intl.DateTimeFormat('en-US', { timeStyle: 'short', hour12: false });
-    return `${dateFormatter.format(date)}, ${timeFormatter.format(date)}`;
+    const formattedDate = new Date(date).toLocaleString();
+    return formattedDate;
 }
-
 function createLabelFunction(columnName) {
     return ({ sorted, descending }) => {
         const sortState = sorted ? `sorted ${descending ? 'descending' : 'ascending'}` : 'not sorted';
@@ -70,11 +68,18 @@ export const columnDefinitions = [
         sortingField: 'end',
     },
     {
-        id: 'lastUpdated',
+        id: 'createdAt',
+        header: 'CreatedAt',
+        cell: item => formatDate(item.createdAt),
+        ariaLabel: createLabelFunction('Last CreatedAt'),
+        sortingComparator: (a, b) => a.createdAt.valueOf() - b.createdAt.valueOf(),
+    },
+    {
+        id: 'updatedAt',
         header: 'Last modified',
-        cell: item => formatDate(item.lastUpdated),
+        cell: item => formatDate(item.updatedAt),
         ariaLabel: createLabelFunction('Last modified'),
-        sortingComparator: (a, b) => a.lastUpdated.valueOf() - b.lastUpdated.valueOf(),
+        sortingComparator: (a, b) => a.updatedAt.valueOf() - b.updatedAt.valueOf(),
     },
 ];
 

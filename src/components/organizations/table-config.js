@@ -6,9 +6,8 @@ export function getMatchesCountText(count) {
 }
 
 function formatDate(date) {
-    const dateFormatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'long' });
-    const timeFormatter = new Intl.DateTimeFormat('en-US', { timeStyle: 'short', hour12: false });
-    return `${dateFormatter.format(date)}, ${timeFormatter.format(date)}`;
+    const formattedDate = new Date(date).toLocaleString();
+    return formattedDate;
 }
 
 function createLabelFunction(columnName) {
@@ -38,22 +37,36 @@ export const columnDefinitions = [
         id: 'description',
         header: 'Description',
         cell: item => item.description,
-        ariaLabel: createLabelFunction('Sescription'),
+        ariaLabel: createLabelFunction('Description'),
         sortingField: 'description',
+    },
+    {
+        id: 'headcount',
+        header: 'Headcount',
+        cell: item => item.headcount,
+        ariaLabel: createLabelFunction('Headcount'),
+        sortingField: 'headcount',
     },
     {
         id: 'planID',
         header: 'Plan',
         cell: item => item.planID,
-        ariaLabel: createLabelFunction('Sescription'),
+        ariaLabel: createLabelFunction('Plan'),
         sortingField: 'planID',
     },
     {
-        id: 'lastUpdated',
+        id: 'createdAt',
+        header: 'CreatedAt',
+        cell: item => formatDate(item.createdAt),
+        ariaLabel: createLabelFunction('Last CreatedAt'),
+        sortingComparator: (a, b) => a.createdAt.valueOf() - b.createdAt.valueOf(),
+    },
+    {
+        id: 'updatedAt',
         header: 'Last modified',
-        cell: item => formatDate(item.lastUpdated),
+        cell: item => formatDate(item.updatedAt),
         ariaLabel: createLabelFunction('Last modified'),
-        sortingComparator: (a, b) => a.lastUpdated.valueOf() - b.lastUpdated.valueOf(),
+        sortingComparator: (a, b) => a.updatedAt.valueOf() - b.updatedAt.valueOf(),
     },
 ];
 
