@@ -68,6 +68,13 @@ export const columnDefinitions = [
         sortingField: 'status',
     },
     {
+        id: 'Sponsor',
+        header: 'Sponsor',
+        cell: item => item.Sponsor,
+        ariaLabel: createLabelFunction('Sponsor'),
+        sortingField: 'Sponsor',
+    },
+    {
         id: 'bucket',
         header: 'Bucket',
         cell: item => item.bucket,

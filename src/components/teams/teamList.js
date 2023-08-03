@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useCollection } from '@cloudscape-design/collection-hooks';
+import React, { useState, useEffect } from "react";
+import { useCollection } from "@cloudscape-design/collection-hooks";
 import {
     Box,
     Button,
@@ -9,25 +9,30 @@ import {
     Table,
     TextFilter,
     Container,
-} from '@cloudscape-design/components';
+} from "@cloudscape-design/components";
 import SpaceBetween from "@cloudscape-design/components/space-between";
 import ButtonDropdown from "@cloudscape-design/components/button-dropdown";
-import { columnDefinitions, getMatchesCountText, paginationLabels, collectionPreferencesProps } from './table-config';
-import { Amplify, API, graphqlOperation } from 'aws-amplify'
+import {
+    columnDefinitions,
+    getMatchesCountText,
+    paginationLabels,
+    collectionPreferencesProps,
+} from "./table-config";
+import { Amplify, API, graphqlOperation } from "aws-amplify";
 import { listTeams } from "../../graphql/queries";
-import { ProjectSampleForm } from '../../ui-components';
-import { createPlan } from '../../graphql/mutations'
+import { ProjectSampleForm } from "../../ui-components";
+import { createPlan } from "../../graphql/mutations";
 import Form from "@cloudscape-design/components/form";
 import FormField from "@cloudscape-design/components/form-field";
 import Input from "@cloudscape-design/components/input";
-import PlanForm from './teamform';
+import PlanForm from "./teamform";
 function EmptyState({ title, subtitle, action }) {
     return (
         <Box textAlign="center" color="inherit">
             <Box variant="strong" textAlign="center" color="inherit">
                 {title}
             </Box>
-            <Box variant="p" padding={{ bottom: 's' }} color="inherit">
+            <Box variant="p" padding={{ bottom: "s" }} color="inherit">
                 {subtitle}
             </Box>
             {action}
@@ -40,24 +45,42 @@ function TeamList() {
     const [showForm, setShowForm] = useState(false);
 
     //const [selectedItems, setSelectedItems] = useState([]);
-    const [preferences, setPreferences] = useState({ pageSize: 10, visibleContent: ['id', 'name', 'description', 'headcount', 'organizationID', 'createdAt', 'updatedAt'] });
-    const { items, actions, filteredItemsCount, collectionProps, filterProps, paginationProps } = useCollection(
-        allItems,
-        {
-            filtering: {
-                empty: <EmptyState title="No Themes" action={<Button onClick={() => setShowForm(true)} >Create Team</Button>} />,
-                noMatch: (
-                    <EmptyState
-                        title="No matches"
-                        action={<Button onClick={() => actions.setFiltering('')}>Clear filter</Button>}
-                    />
-                ),
-            },
-            pagination: { pageSize: preferences.pageSize },
-            sorting: {},
-            selection: {},
-        }
-    );
+    const [preferences, setPreferences] = useState({
+        pageSize: 10,
+        visibleContent: ["name", "description", "headcount", "organizationID"],
+    });
+    const {
+        items,
+        actions,
+        filteredItemsCount,
+        collectionProps,
+        filterProps,
+        paginationProps,
+    } = useCollection(allItems, {
+        filtering: {
+            empty: (
+                <EmptyState
+                    title="No Themes"
+                    action={
+                        <Button onClick={() => setShowForm(true)}>Create Team</Button>
+                    }
+                />
+            ),
+            noMatch: (
+                <EmptyState
+                    title="No matches"
+                    action={
+                        <Button onClick={() => actions.setFiltering("")}>
+                            Clear filter
+                        </Button>
+                    }
+                />
+            ),
+        },
+        pagination: { pageSize: preferences.pageSize },
+        sorting: {},
+        selection: {},
+    });
     function trigger() {
         load();
     }
@@ -65,7 +88,7 @@ function TeamList() {
     const { selectedItems } = collectionProps;
     const load = async () => {
         const res = await API.graphql({
-            query: listTeams
+            query: listTeams,
         });
         console.log(res.data.listTeams);
 
@@ -81,15 +104,13 @@ function TeamList() {
                 selectionType="multi"
                 header={
                     <Header
-                        counter={selectedItems.length ? `(${selectedItems.length}/${allItems.length})` : `(${allItems.length})`}
+                        counter={
+                            selectedItems.length
+                                ? `(${selectedItems.length}/${allItems.length})`
+                                : `(${allItems.length})`
+                        }
                         actions={
-                            <SpaceBetween
-                                direction="horizontal"
-                                size="xs"
-                            >
-
-
-
+                            <SpaceBetween direction="horizontal" size="xs">
                                 <Button variant="primary" onClick={() => setShowForm(true)}>
                                     Create Team
                                 </Button>
@@ -102,7 +123,9 @@ function TeamList() {
                 columnDefinitions={columnDefinitions}
                 visibleColumns={preferences.visibleContent}
                 items={items}
-                pagination={<Pagination {...paginationProps} ariaLabels={paginationLabels} />}
+                pagination={
+                    <Pagination {...paginationProps} ariaLabels={paginationLabels} />
+                }
                 filter={
                     <TextFilter
                         {...filterProps}
@@ -120,17 +143,14 @@ function TeamList() {
             />
             <React.Fragment>
                 {showForm && (
-                    <Container
-                    >
+                    <Container>
                         <SpaceBetween direction="vertical" size="l">
                             <PlanForm setShowForm={setShowForm} trigger={trigger} />
-
                         </SpaceBetween>
                     </Container>
                 )}
             </React.Fragment>
         </>
     );
-
 }
 export default TeamList;

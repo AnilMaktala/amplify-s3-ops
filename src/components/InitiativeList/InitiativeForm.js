@@ -17,7 +17,7 @@ import {
 import SpaceBetween from "@cloudscape-design/components/space-between";
 import { Amplify, API, graphqlOperation } from 'aws-amplify'
 import { createInitiative } from '../../graphql/mutations'
-import { listPlans, listThemes } from "../../graphql/queries";
+import { listPlans, listThemes, listPeople } from "../../graphql/queries";
 function IntiativeForm({ setShowForm, trigger }) {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
@@ -30,11 +30,17 @@ function IntiativeForm({ setShowForm, trigger }) {
         setSelectedPlan
     ] = React.useState({ label: "select Plan", value: "0" });
     const [
+        selectedPerson,
+        setSelectedPerson
+    ] = React.useState({ label: "select Sponser", value: "0" });
+    const [persons, setPersons] = useState([]);
+    const [
         selectedTheme,
         setSelectedTheme
     ] = React.useState({ label: "select Theme", value: "0" });
     const [plans, setPlans] = useState([]);
     const [themes, setThemes] = useState([]);
+
     const [state, setState] = useState({
         title: "intiative2",
         description: "intiative2",
@@ -42,7 +48,8 @@ function IntiativeForm({ setShowForm, trigger }) {
         themeID: 2,
         planID: 2,
         bucket: "",
-        status: "ACTIVE"
+        status: "ACTIVE",
+        initiativeSponsorId: ""
 
 
     });
@@ -86,6 +93,25 @@ function IntiativeForm({ setShowForm, trigger }) {
         ])
         //setAllItems(res.data.listPlans.items);
     };
+    const loadPersons = async () => {
+        const res = await API.graphql({
+            query: listPeople
+        });
+        console.log(res.data.listPeople);
+        res.data.listPeople.items.forEach((value) => {
+            persons.push({
+                key: value.id,
+                value: value.name,
+            });
+        });
+        // Update the options state
+        setPersons([
+            { key: 'Select a Person', value: '' },
+            ...persons
+        ])
+
+    };
+
     const [
         selectedBucket,
         setSelectedBucket
@@ -107,11 +133,14 @@ function IntiativeForm({ setShowForm, trigger }) {
         state.themeID = selectedTheme.value;
         state.bucket = selectedBucket.id;
         state.status = selectedStatus.id;
+        state.initiativeSponsorId = selectedPerson.value;
         console.log(state);
+
     };
     useEffect(() => {
         loadPlans();
         loadThemes();
+        loadPersons();
     }, []);
 
     return (
@@ -204,6 +233,18 @@ function IntiativeForm({ setShowForm, trigger }) {
                                     { label: "ACTIVE", id: "ACTIVE" },
                                     { label: "CANCELLED", id: "CANCELLED" }
                                 ]}
+                            />
+                        </FormField>
+                        <FormField
+                            label="Sponsor"
+                            secondaryControl={<Button iconName="refresh" />}
+                        >
+                            <Select
+                                selectedOption={selectedPerson}
+                                onChange={({ detail }) =>
+                                    setSelectedPerson(detail.selectedOption)
+                                }
+                                options={persons}
                             />
                         </FormField>
                         <FormField

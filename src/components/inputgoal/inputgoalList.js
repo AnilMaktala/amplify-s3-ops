@@ -40,7 +40,7 @@ function InputGoalList() {
     const [showForm, setShowForm] = useState(false);
 
     //const [selectedItems, setSelectedItems] = useState([]);
-    const [preferences, setPreferences] = useState({ pageSize: 10, visibleContent: ['id', 'title', 'description', 'status', 'class', 'start', 'end', 'createdAt', 'updatedAt'] });
+    const [preferences, setPreferences] = useState({ pageSize: 10, visibleContent: ['title', 'description', 'status', 'class', 'start', 'end'] });
     const { items, actions, filteredItemsCount, collectionProps, filterProps, paginationProps } = useCollection(
         allItems,
         {

@@ -40,7 +40,7 @@ function InitiativeList() {
     const [showForm, setShowForm] = useState(false);
 
     //const [selectedItems, setSelectedItems] = useState([]);
-    const [preferences, setPreferences] = useState({ pageSize: 10, visibleContent: ['id', 'title', 'description', 'rank', 'themeID', 'planID', 'status', 'bucket', 'createdAt', 'updatedAt', 'actions'] });
+    const [preferences, setPreferences] = useState({ pageSize: 10, visibleContent: ['title', 'description', 'rank', 'themeID', 'planID', 'status', 'bucket', 'Sponsor', 'actions'] });
     const { items, actions, filteredItemsCount, collectionProps, filterProps, paginationProps } = useCollection(
         allItems,
         {
