@@ -13,7 +13,7 @@ import InitiativeList from "./components/initiatives/InitiativeList";
 import ThemeList from "./components/themes/ThemeList";
 //import PlanList from "./components/plans/PlanList";
 import PersonList from "./components/persons/PersonList";
-import OrganizationList from "./components/organizations/OrganizationList";
+//import OrganizationList from "./components/organizations/OrganizationList";
 import InputGoalList from "./components/goals/input/InputGoalList";
 import OutputGoalList from "./components/goals/output/OutputGoalList";
 import OutcomeGoalList from "./components/goals/outcome/OutcomeGoalList";
@@ -34,7 +34,7 @@ root.render(
         <Route path="initiatives" element={<InitiativeList />} />
         <Route path="themes" element={<ThemeList />} />
         {/* <Route path="plans" element={<PlanList />} /> */}
-        <Route path="organizations" element={<OrganizationList />} />
+        {/* <Route path="organizations" element={<OrganizationList />} /> */}
         <Route path="persons" element={<PersonList />} />
 
         <Route path="goal/outcome" element={<OutcomeGoalList />} />
