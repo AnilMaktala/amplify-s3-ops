@@ -17,7 +17,7 @@ import PersonList from "./components/persons/PersonList";
 import InputGoalList from "./components/goals/input/InputGoalList";
 import OutputGoalList from "./components/goals/output/OutputGoalList";
 import OutcomeGoalList from "./components/goals/outcome/OutcomeGoalList";
-import { OverviewDoc } from "./components/docs/OverviewDoc";
+//import { OverviewDoc } from "./components/docs/OverviewDoc";
 import { InitiativeChart } from "./components/analysis/InitiativeChart";
 import { BucketChart } from "./components/analysis/BucketChart";
 import { DashboardView } from "./components/analysis/DashboardView";
@@ -28,7 +28,7 @@ root.render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<App />}>
-        <Route path="overview" element={<OverviewDoc />} />
+        {/* <Route path="overview" element={<OverviewDoc />} /> */}
 
         <Route path="projects" element={<ProjectList />} />
         <Route path="initiatives" element={<InitiativeList />} />
