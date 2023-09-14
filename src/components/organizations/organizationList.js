@@ -1,13 +1,31 @@
-import React, { useState, useEffect } from 'react';
-import { useCollection } from '@cloudscape-design/collection-hooks';
-import { Box, Button, CollectionPreferences, Header, Pagination, Table, TextFilter, Container, } from '@cloudscape-design/components';
+import React, { useState, useEffect } from "react";
+import { useCollection } from "@cloudscape-design/collection-hooks";
+import {
+  Box,
+  Button,
+  CollectionPreferences,
+  Header,
+  Pagination,
+  Table,
+  TextFilter,
+  Container,
+} from "@cloudscape-design/components";
 import SpaceBetween from "@cloudscape-design/components/space-between";
-import { columnDefinitions, getMatchesCountText, paginationLabels, collectionPreferencesProps } from './table-config';
-import { Cache } from 'aws-amplify'
-import { OrganizationForm } from './OrganizationForm';
-import { fetchActivePlan, fetchOrganizations, removeOrganization } from '../../common/graphqlHelper'
-import { modesFilter } from '../../common/tableHelper'
-import { OP2Cache } from '../../common/cacheHelper';
+import {
+  columnDefinitions,
+  getMatchesCountText,
+  paginationLabels,
+  collectionPreferencesProps,
+} from "./table-config";
+import { Cache } from "aws-amplify";
+import { OrganizationForm } from "./OrganizationForm";
+import {
+  fetchActivePlan,
+  fetchOrganizations,
+  removeOrganization,
+} from "../../common/graphqlHelper";
+import { modesFilter } from "../../common/tableHelper";
+import { OP2Cache } from "../../common/cacheHelper";
 
 function EmptyState({ title, subtitle, action }) {
   return (
@@ -15,7 +33,7 @@ function EmptyState({ title, subtitle, action }) {
       <Box variant="strong" textAlign="center" color="inherit">
         {title}
       </Box>
-      <Box variant="p" padding={{ bottom: 's' }} color="inherit">
+      <Box variant="p" padding={{ bottom: "s" }} color="inherit">
         {subtitle}
       </Box>
       {action}
@@ -25,7 +43,9 @@ function EmptyState({ title, subtitle, action }) {
 
 function OrganizationList() {
   const [activeIsb, setActiveIsb] = useState(Cache.getItem("isBizOps"));
-  const [overActiveIsb, setOverActiveIsb] = useState(OP2Cache.getItem("overIsBizOps"));
+  const [overActiveIsb, setOverActiveIsb] = useState(
+    OP2Cache.getItem("overIsBizOps")
+  );
   const [activeOrg, setActiveOrg] = useState(Cache.getItem("activeOrg"));
   const [activePlan, setActivePlan] = useState({});
   const [editId, setEditId] = useState(null);
@@ -36,8 +56,7 @@ function OrganizationList() {
 
   const [preferences, setPreferences] = useState({
     pageSize: 20,
-    visibleContent: ["name", "description", "headcount", "managerAlias"
-    ],
+    visibleContent: ["name", "description", "headcount", "managerAlias"],
   });
   const {
     items,
@@ -49,7 +68,10 @@ function OrganizationList() {
   } = useCollection(allItems, {
     filtering: {
       empty: (
-        <EmptyState title="No Organizations" action={<Button>Create Organization</Button>} />
+        <EmptyState
+          title="No Organizations"
+          action={<Button>Create Organization</Button>}
+        />
       ),
       noMatch: (
         <EmptyState
@@ -61,7 +83,7 @@ function OrganizationList() {
           }
         />
       ),
-      filteringFunction: modesFilter
+      filteringFunction: modesFilter,
     },
     pagination: { pageSize: preferences.pageSize },
     sorting: { defaultState: { sortingColumn: columnDefinitions[1] } },
@@ -73,13 +95,12 @@ function OrganizationList() {
     let token = Cache.getItem("nextToken");
 
     setLoading(true);
-    var items = []
+    var items = [];
     do {
       const res = await fetchOrganizations(planId, token);
-      items = [...items, ...res]
-      token = Cache.getItem("nextToken")
-    }
-    while (token);
+      items = [...items, ...res];
+      token = Cache.getItem("nextToken");
+    } while (token);
 
     if (token) {
       setAllItems([...allItems, ...items]);
@@ -109,17 +130,20 @@ function OrganizationList() {
     setEditId(null);
     Cache.removeItem("editId");
     setShowForm(true);
-  };
+  }
   function handleEdit() {
     if (selectedItems.length === 1) {
       setEditId(selectedItems[0].id);
       setShowForm(true);
     }
-  };
+  }
   function handleDelete() {
     if (selectedItems.length === 1) {
       let id = selectedItems[0].id;
-      if (id) removeOrganization(id).then((res) => { console.log(res); })
+      if (id)
+        removeOrganization(id).then((res) => {
+          console.log(res);
+        });
     }
   }
 
@@ -127,14 +151,16 @@ function OrganizationList() {
     <>
       <React.Fragment>
         {showForm && (
-          <Container
-          >
+          <Container>
             <SpaceBetween direction="vertical" size="l">
-              <OrganizationForm setShowForm={setShowForm} trigger={trigger}
+              <OrganizationForm
+                setShowForm={setShowForm}
+                trigger={trigger}
                 plan={activePlan}
                 org={activeOrg}
-                isb={(activeIsb || overActiveIsb)}
-                editId={editId} />
+                isb={activeIsb || overActiveIsb}
+                editId={editId}
+              />
             </SpaceBetween>
           </Container>
         )}
@@ -146,18 +172,40 @@ function OrganizationList() {
         selectionType="multi"
         header={
           <Header
-            counter={selectedItems.length ? `(${selectedItems.length}/${allItems.length})` : `(${allItems.length})`}
+            counter={
+              selectedItems.length
+                ? `(${selectedItems.length}/${allItems.length})`
+                : `(${allItems.length})`
+            }
             actions={
               <SpaceBetween direction="horizontal" size="xs">
-                <Button onClick={event => trigger()} iconName="refresh" />
-                <Button disabled={!Cache.getItem("nextToken")} onClick={event => trigger()} iconName="add-plus" />
-                <Button disabled={!(activeIsb || overActiveIsb) || (selectedItems.length != 1)} onClick={() => handleEdit()} >
+                <Button onClick={(event) => trigger()} iconName="refresh" />
+                <Button
+                  disabled={!Cache.getItem("nextToken")}
+                  onClick={(event) => trigger()}
+                  iconName="add-plus"
+                />
+                <Button
+                  disabled={
+                    !(activeIsb || overActiveIsb) || selectedItems.length != 1
+                  }
+                  onClick={() => handleEdit()}
+                >
                   Edit Organization
                 </Button>
-                <Button disabled={!(activeIsb || overActiveIsb) || (selectedItems.length != 1)} onClick={() => handleDelete()} >
+                <Button
+                  disabled={
+                    !(activeIsb || overActiveIsb) || selectedItems.length != 1
+                  }
+                  onClick={() => handleDelete()}
+                >
                   Delete Organization
                 </Button>
-                <Button disabled={!(activeIsb || overActiveIsb)} variant="primary" onClick={() => handleCreate()}>
+                <Button
+                  disabled={!(activeIsb || overActiveIsb)}
+                  variant="primary"
+                  onClick={() => handleCreate()}
+                >
                   Create Organization
                 </Button>
               </SpaceBetween>
@@ -170,7 +218,9 @@ function OrganizationList() {
         columnDefinitions={columnDefinitions}
         visibleColumns={preferences.visibleContent}
         items={items}
-        pagination={<Pagination {...paginationProps} ariaLabels={paginationLabels} />}
+        pagination={
+          <Pagination {...paginationProps} ariaLabels={paginationLabels} />
+        }
         filter={
           <TextFilter
             {...filterProps}
@@ -188,6 +238,5 @@ function OrganizationList() {
       />
     </>
   );
-
 }
 export default OrganizationList;
