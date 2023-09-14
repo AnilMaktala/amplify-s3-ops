@@ -11,7 +11,7 @@ import awsExports from "./aws-exports";
 import ProjectList from "./components/projects/ProjectList";
 import InitiativeList from "./components/initiatives/InitiativeList";
 import ThemeList from "./components/themes/ThemeList";
-import PlanList from "./components/plans/PlanList";
+//import PlanList from "./components/plans/PlanList";
 import PersonList from "./components/persons/PersonList";
 import OrganizationList from "./components/organizations/OrganizationList";
 import InputGoalList from "./components/goals/input/InputGoalList";
@@ -33,7 +33,7 @@ root.render(
         <Route path="projects" element={<ProjectList />} />
         <Route path="initiatives" element={<InitiativeList />} />
         <Route path="themes" element={<ThemeList />} />
-        <Route path="plans" element={<PlanList />} />
+        {/* <Route path="plans" element={<PlanList />} /> */}
         <Route path="organizations" element={<OrganizationList />} />
         <Route path="persons" element={<PersonList />} />
 
