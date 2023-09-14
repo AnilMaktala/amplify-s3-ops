@@ -1,171 +1,843 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createOutputGoal = /* GraphQL */ `
-  mutation CreateOutputGoal(
-    $input: CreateOutputGoalInput!
-    $condition: ModelOutputGoalConditionInput
+export const batchCreateSnapshots = /* GraphQL */ `
+  mutation BatchCreateSnapshots($input: [BatchCreateSnapshotInput!]) {
+    batchCreateSnapshots(input: $input) {
+      id
+      timestamp
+      planYear
+      planTitle
+      projectTitle
+      projectDescription
+      projectRank
+      projectFunding
+      projectHeadcount
+      initiativeTitle
+      initiativeDescription
+      organizationName
+      organizationManagerAlias
+      ownerAlias
+      goalTitle
+      goalDescription
+      snapshotPlanId
+      snapshotProjectId
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const createSnapshot = /* GraphQL */ `
+  mutation CreateSnapshot(
+    $input: CreateSnapshotInput!
+    $condition: ModelSnapshotConditionInput
   ) {
-    createOutputGoal(input: $input, condition: $condition) {
+    createSnapshot(input: $input, condition: $condition) {
+      id
+      timestamp
+      planYear
+      planTitle
+      projectTitle
+      projectDescription
+      projectRank
+      projectFunding
+      projectHeadcount
+      initiativeTitle
+      initiativeDescription
+      organizationName
+      organizationManagerAlias
+      ownerAlias
+      goalTitle
+      goalDescription
+      snapshotPlanId
+      snapshotProjectId
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const updateSnapshot = /* GraphQL */ `
+  mutation UpdateSnapshot(
+    $input: UpdateSnapshotInput!
+    $condition: ModelSnapshotConditionInput
+  ) {
+    updateSnapshot(input: $input, condition: $condition) {
+      id
+      timestamp
+      planYear
+      planTitle
+      projectTitle
+      projectDescription
+      projectRank
+      projectFunding
+      projectHeadcount
+      initiativeTitle
+      initiativeDescription
+      organizationName
+      organizationManagerAlias
+      ownerAlias
+      goalTitle
+      goalDescription
+      snapshotPlanId
+      snapshotProjectId
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const deleteSnapshot = /* GraphQL */ `
+  mutation DeleteSnapshot(
+    $input: DeleteSnapshotInput!
+    $condition: ModelSnapshotConditionInput
+  ) {
+    deleteSnapshot(input: $input, condition: $condition) {
+      id
+      timestamp
+      planYear
+      planTitle
+      projectTitle
+      projectDescription
+      projectRank
+      projectFunding
+      projectHeadcount
+      initiativeTitle
+      initiativeDescription
+      organizationName
+      organizationManagerAlias
+      ownerAlias
+      goalTitle
+      goalDescription
+      snapshotPlanId
+      snapshotProjectId
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const createGoal = /* GraphQL */ `
+  mutation CreateGoal(
+    $input: CreateGoalInput!
+    $condition: ModelGoalConditionInput
+  ) {
+    createGoal(input: $input, condition: $condition) {
       id
       title
       description
       status
+      type
       class
       start
       end
-      organizationID
-      InputGoals {
-        items {
+      Plan {
+        id
+        title
+        description
+        year
+        ktloTarget
+        status
+        createdAt
+        updatedAt
+        __typename
+      }
+      Organization {
+        id
+        name
+        description
+        headcount
+        incTarget
+        mgrTarget
+        icTarget
+        peTarget
+        pmTarget
+        tpmTarget
+        argTarget
+        Plan {
           id
           title
           description
+          year
+          ktloTarget
           status
-          class
-          start
-          end
-          outputgoalID
           createdAt
           updatedAt
           __typename
         }
-        nextToken
-        __typename
-      }
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const updateOutputGoal = /* GraphQL */ `
-  mutation UpdateOutputGoal(
-    $input: UpdateOutputGoalInput!
-    $condition: ModelOutputGoalConditionInput
-  ) {
-    updateOutputGoal(input: $input, condition: $condition) {
-      id
-      title
-      description
-      status
-      class
-      start
-      end
-      organizationID
-      InputGoals {
-        items {
+        Manager {
           id
-          title
-          description
+          alias
+          name
+          email
           status
-          class
-          start
-          end
-          outputgoalID
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
           createdAt
           updatedAt
           __typename
         }
-        nextToken
-        __typename
-      }
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const deleteOutputGoal = /* GraphQL */ `
-  mutation DeleteOutputGoal(
-    $input: DeleteOutputGoalInput!
-    $condition: ModelOutputGoalConditionInput
-  ) {
-    deleteOutputGoal(input: $input, condition: $condition) {
-      id
-      title
-      description
-      status
-      class
-      start
-      end
-      organizationID
-      InputGoals {
-        items {
+        Parent {
           id
-          title
+          name
           description
-          status
-          class
-          start
-          end
-          outputgoalID
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
           createdAt
           updatedAt
           __typename
         }
-        nextToken
+        organizationPlanId
+        organizationManagerId
+        organizationParentId
+        createdAt
+        updatedAt
         __typename
       }
+      Owner {
+        id
+        alias
+        name
+        email
+        status
+        sixManagerAlias
+        isManager
+        isBizOps
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Manager {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Organization {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        personPlanId
+        personManagerId
+        personOrganizationId
+        createdAt
+        updatedAt
+        __typename
+      }
+      Parent {
+        id
+        title
+        description
+        status
+        type
+        class
+        start
+        end
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Organization {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Owner {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Parent {
+          id
+          title
+          description
+          status
+          type
+          class
+          start
+          end
+          goalPlanId
+          goalOrganizationId
+          goalOwnerId
+          goalParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        goalPlanId
+        goalOrganizationId
+        goalOwnerId
+        goalParentId
+        createdAt
+        updatedAt
+        __typename
+      }
+      goalPlanId
+      goalOrganizationId
+      goalOwnerId
+      goalParentId
       createdAt
       updatedAt
       __typename
     }
   }
 `;
-export const createInputGoal = /* GraphQL */ `
-  mutation CreateInputGoal(
-    $input: CreateInputGoalInput!
-    $condition: ModelInputGoalConditionInput
+export const updateGoal = /* GraphQL */ `
+  mutation UpdateGoal(
+    $input: UpdateGoalInput!
+    $condition: ModelGoalConditionInput
   ) {
-    createInputGoal(input: $input, condition: $condition) {
+    updateGoal(input: $input, condition: $condition) {
       id
       title
       description
       status
+      type
       class
       start
       end
-      outputgoalID
+      Plan {
+        id
+        title
+        description
+        year
+        ktloTarget
+        status
+        createdAt
+        updatedAt
+        __typename
+      }
+      Organization {
+        id
+        name
+        description
+        headcount
+        incTarget
+        mgrTarget
+        icTarget
+        peTarget
+        pmTarget
+        tpmTarget
+        argTarget
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Manager {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Parent {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        organizationPlanId
+        organizationManagerId
+        organizationParentId
+        createdAt
+        updatedAt
+        __typename
+      }
+      Owner {
+        id
+        alias
+        name
+        email
+        status
+        sixManagerAlias
+        isManager
+        isBizOps
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Manager {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Organization {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        personPlanId
+        personManagerId
+        personOrganizationId
+        createdAt
+        updatedAt
+        __typename
+      }
+      Parent {
+        id
+        title
+        description
+        status
+        type
+        class
+        start
+        end
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Organization {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Owner {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Parent {
+          id
+          title
+          description
+          status
+          type
+          class
+          start
+          end
+          goalPlanId
+          goalOrganizationId
+          goalOwnerId
+          goalParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        goalPlanId
+        goalOrganizationId
+        goalOwnerId
+        goalParentId
+        createdAt
+        updatedAt
+        __typename
+      }
+      goalPlanId
+      goalOrganizationId
+      goalOwnerId
+      goalParentId
       createdAt
       updatedAt
       __typename
     }
   }
 `;
-export const updateInputGoal = /* GraphQL */ `
-  mutation UpdateInputGoal(
-    $input: UpdateInputGoalInput!
-    $condition: ModelInputGoalConditionInput
+export const deleteGoal = /* GraphQL */ `
+  mutation DeleteGoal(
+    $input: DeleteGoalInput!
+    $condition: ModelGoalConditionInput
   ) {
-    updateInputGoal(input: $input, condition: $condition) {
+    deleteGoal(input: $input, condition: $condition) {
       id
       title
       description
       status
+      type
       class
       start
       end
-      outputgoalID
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const deleteInputGoal = /* GraphQL */ `
-  mutation DeleteInputGoal(
-    $input: DeleteInputGoalInput!
-    $condition: ModelInputGoalConditionInput
-  ) {
-    deleteInputGoal(input: $input, condition: $condition) {
-      id
-      title
-      description
-      status
-      class
-      start
-      end
-      outputgoalID
+      Plan {
+        id
+        title
+        description
+        year
+        ktloTarget
+        status
+        createdAt
+        updatedAt
+        __typename
+      }
+      Organization {
+        id
+        name
+        description
+        headcount
+        incTarget
+        mgrTarget
+        icTarget
+        peTarget
+        pmTarget
+        tpmTarget
+        argTarget
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Manager {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Parent {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        organizationPlanId
+        organizationManagerId
+        organizationParentId
+        createdAt
+        updatedAt
+        __typename
+      }
+      Owner {
+        id
+        alias
+        name
+        email
+        status
+        sixManagerAlias
+        isManager
+        isBizOps
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Manager {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Organization {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        personPlanId
+        personManagerId
+        personOrganizationId
+        createdAt
+        updatedAt
+        __typename
+      }
+      Parent {
+        id
+        title
+        description
+        status
+        type
+        class
+        start
+        end
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Organization {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Owner {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Parent {
+          id
+          title
+          description
+          status
+          type
+          class
+          start
+          end
+          goalPlanId
+          goalOrganizationId
+          goalOwnerId
+          goalParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        goalPlanId
+        goalOrganizationId
+        goalOwnerId
+        goalParentId
+        createdAt
+        updatedAt
+        __typename
+      }
+      goalPlanId
+      goalOrganizationId
+      goalOwnerId
+      goalParentId
       createdAt
       updatedAt
       __typename
@@ -182,22 +854,15 @@ export const createProject = /* GraphQL */ `
       title
       description
       rank
-      priority
+      funding
       headcount
-      Owner {
+      Plan {
         id
-        alias
-        name
-        email
-        createdAt
-        updatedAt
-        __typename
-      }
-      Sponsor {
-        id
-        alias
-        name
-        email
+        title
+        description
+        year
+        ktloTarget
+        status
         createdAt
         updatedAt
         __typename
@@ -207,29 +872,265 @@ export const createProject = /* GraphQL */ `
         title
         description
         rank
-        themeID
-        planID
+        bucket
         status
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Theme {
+          id
+          title
+          description
+          themePlanId
+          createdAt
+          updatedAt
+          __typename
+        }
         Sponsor {
           id
           alias
           name
           email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
           createdAt
           updatedAt
           __typename
         }
-        bucket
+        initiativePlanId
+        initiativeThemeId
+        initiativeSponsorId
         createdAt
         updatedAt
-        initiativeSponsorId
         __typename
       }
+      Organization {
+        id
+        name
+        description
+        headcount
+        incTarget
+        mgrTarget
+        icTarget
+        peTarget
+        pmTarget
+        tpmTarget
+        argTarget
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Manager {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Parent {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        organizationPlanId
+        organizationManagerId
+        organizationParentId
+        createdAt
+        updatedAt
+        __typename
+      }
+      Owner {
+        id
+        alias
+        name
+        email
+        status
+        sixManagerAlias
+        isManager
+        isBizOps
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Manager {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Organization {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        personPlanId
+        personManagerId
+        personOrganizationId
+        createdAt
+        updatedAt
+        __typename
+      }
+      Goal {
+        id
+        title
+        description
+        status
+        type
+        class
+        start
+        end
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Organization {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Owner {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Parent {
+          id
+          title
+          description
+          status
+          type
+          class
+          start
+          end
+          goalPlanId
+          goalOrganizationId
+          goalOwnerId
+          goalParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        goalPlanId
+        goalOrganizationId
+        goalOwnerId
+        goalParentId
+        createdAt
+        updatedAt
+        __typename
+      }
+      projectPlanId
+      projectInitiativeId
+      projectOrganizationId
+      projectOwnerId
+      projectGoalId
       createdAt
       updatedAt
-      projectOwnerId
-      projectSponsorId
-      projectInitiativeId
       __typename
     }
   }
@@ -244,22 +1145,15 @@ export const updateProject = /* GraphQL */ `
       title
       description
       rank
-      priority
+      funding
       headcount
-      Owner {
+      Plan {
         id
-        alias
-        name
-        email
-        createdAt
-        updatedAt
-        __typename
-      }
-      Sponsor {
-        id
-        alias
-        name
-        email
+        title
+        description
+        year
+        ktloTarget
+        status
         createdAt
         updatedAt
         __typename
@@ -269,29 +1163,265 @@ export const updateProject = /* GraphQL */ `
         title
         description
         rank
-        themeID
-        planID
+        bucket
         status
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Theme {
+          id
+          title
+          description
+          themePlanId
+          createdAt
+          updatedAt
+          __typename
+        }
         Sponsor {
           id
           alias
           name
           email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
           createdAt
           updatedAt
           __typename
         }
-        bucket
+        initiativePlanId
+        initiativeThemeId
+        initiativeSponsorId
         createdAt
         updatedAt
-        initiativeSponsorId
         __typename
       }
+      Organization {
+        id
+        name
+        description
+        headcount
+        incTarget
+        mgrTarget
+        icTarget
+        peTarget
+        pmTarget
+        tpmTarget
+        argTarget
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Manager {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Parent {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        organizationPlanId
+        organizationManagerId
+        organizationParentId
+        createdAt
+        updatedAt
+        __typename
+      }
+      Owner {
+        id
+        alias
+        name
+        email
+        status
+        sixManagerAlias
+        isManager
+        isBizOps
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Manager {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Organization {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        personPlanId
+        personManagerId
+        personOrganizationId
+        createdAt
+        updatedAt
+        __typename
+      }
+      Goal {
+        id
+        title
+        description
+        status
+        type
+        class
+        start
+        end
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Organization {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Owner {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Parent {
+          id
+          title
+          description
+          status
+          type
+          class
+          start
+          end
+          goalPlanId
+          goalOrganizationId
+          goalOwnerId
+          goalParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        goalPlanId
+        goalOrganizationId
+        goalOwnerId
+        goalParentId
+        createdAt
+        updatedAt
+        __typename
+      }
+      projectPlanId
+      projectInitiativeId
+      projectOrganizationId
+      projectOwnerId
+      projectGoalId
       createdAt
       updatedAt
-      projectOwnerId
-      projectSponsorId
-      projectInitiativeId
       __typename
     }
   }
@@ -306,22 +1436,15 @@ export const deleteProject = /* GraphQL */ `
       title
       description
       rank
-      priority
+      funding
       headcount
-      Owner {
+      Plan {
         id
-        alias
-        name
-        email
-        createdAt
-        updatedAt
-        __typename
-      }
-      Sponsor {
-        id
-        alias
-        name
-        email
+        title
+        description
+        year
+        ktloTarget
+        status
         createdAt
         updatedAt
         __typename
@@ -331,152 +1454,265 @@ export const deleteProject = /* GraphQL */ `
         title
         description
         rank
-        themeID
-        planID
+        bucket
         status
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Theme {
+          id
+          title
+          description
+          themePlanId
+          createdAt
+          updatedAt
+          __typename
+        }
         Sponsor {
           id
           alias
           name
           email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
           createdAt
           updatedAt
           __typename
         }
-        bucket
-        createdAt
-        updatedAt
+        initiativePlanId
+        initiativeThemeId
         initiativeSponsorId
+        createdAt
+        updatedAt
         __typename
       }
-      createdAt
-      updatedAt
-      projectOwnerId
-      projectSponsorId
+      Organization {
+        id
+        name
+        description
+        headcount
+        incTarget
+        mgrTarget
+        icTarget
+        peTarget
+        pmTarget
+        tpmTarget
+        argTarget
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Manager {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Parent {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        organizationPlanId
+        organizationManagerId
+        organizationParentId
+        createdAt
+        updatedAt
+        __typename
+      }
+      Owner {
+        id
+        alias
+        name
+        email
+        status
+        sixManagerAlias
+        isManager
+        isBizOps
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Manager {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Organization {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        personPlanId
+        personManagerId
+        personOrganizationId
+        createdAt
+        updatedAt
+        __typename
+      }
+      Goal {
+        id
+        title
+        description
+        status
+        type
+        class
+        start
+        end
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Organization {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Owner {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Parent {
+          id
+          title
+          description
+          status
+          type
+          class
+          start
+          end
+          goalPlanId
+          goalOrganizationId
+          goalOwnerId
+          goalParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        goalPlanId
+        goalOrganizationId
+        goalOwnerId
+        goalParentId
+        createdAt
+        updatedAt
+        __typename
+      }
+      projectPlanId
       projectInitiativeId
-      __typename
-    }
-  }
-`;
-export const createTeam = /* GraphQL */ `
-  mutation CreateTeam(
-    $input: CreateTeamInput!
-    $condition: ModelTeamConditionInput
-  ) {
-    createTeam(input: $input, condition: $condition) {
-      id
-      name
-      description
-      headcount
-      organizationID
-      Manager {
-        id
-        alias
-        name
-        email
-        createdAt
-        updatedAt
-        __typename
-      }
-      InputGoal {
-        id
-        title
-        description
-        status
-        class
-        start
-        end
-        outputgoalID
-        createdAt
-        updatedAt
-        __typename
-      }
+      projectOrganizationId
+      projectOwnerId
+      projectGoalId
       createdAt
       updatedAt
-      teamManagerId
-      teamInputGoalId
-      __typename
-    }
-  }
-`;
-export const updateTeam = /* GraphQL */ `
-  mutation UpdateTeam(
-    $input: UpdateTeamInput!
-    $condition: ModelTeamConditionInput
-  ) {
-    updateTeam(input: $input, condition: $condition) {
-      id
-      name
-      description
-      headcount
-      organizationID
-      Manager {
-        id
-        alias
-        name
-        email
-        createdAt
-        updatedAt
-        __typename
-      }
-      InputGoal {
-        id
-        title
-        description
-        status
-        class
-        start
-        end
-        outputgoalID
-        createdAt
-        updatedAt
-        __typename
-      }
-      createdAt
-      updatedAt
-      teamManagerId
-      teamInputGoalId
-      __typename
-    }
-  }
-`;
-export const deleteTeam = /* GraphQL */ `
-  mutation DeleteTeam(
-    $input: DeleteTeamInput!
-    $condition: ModelTeamConditionInput
-  ) {
-    deleteTeam(input: $input, condition: $condition) {
-      id
-      name
-      description
-      headcount
-      organizationID
-      Manager {
-        id
-        alias
-        name
-        email
-        createdAt
-        updatedAt
-        __typename
-      }
-      InputGoal {
-        id
-        title
-        description
-        status
-        class
-        start
-        end
-        outputgoalID
-        createdAt
-        updatedAt
-        __typename
-      }
-      createdAt
-      updatedAt
-      teamManagerId
-      teamInputGoalId
       __typename
     }
   }
@@ -491,6 +1727,151 @@ export const createPerson = /* GraphQL */ `
       alias
       name
       email
+      status
+      sixManagerAlias
+      isManager
+      isBizOps
+      Plan {
+        id
+        title
+        description
+        year
+        ktloTarget
+        status
+        createdAt
+        updatedAt
+        __typename
+      }
+      Manager {
+        id
+        alias
+        name
+        email
+        status
+        sixManagerAlias
+        isManager
+        isBizOps
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Manager {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Organization {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        personPlanId
+        personManagerId
+        personOrganizationId
+        createdAt
+        updatedAt
+        __typename
+      }
+      Organization {
+        id
+        name
+        description
+        headcount
+        incTarget
+        mgrTarget
+        icTarget
+        peTarget
+        pmTarget
+        tpmTarget
+        argTarget
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Manager {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Parent {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        organizationPlanId
+        organizationManagerId
+        organizationParentId
+        createdAt
+        updatedAt
+        __typename
+      }
+      personPlanId
+      personManagerId
+      personOrganizationId
       createdAt
       updatedAt
       __typename
@@ -507,6 +1888,151 @@ export const updatePerson = /* GraphQL */ `
       alias
       name
       email
+      status
+      sixManagerAlias
+      isManager
+      isBizOps
+      Plan {
+        id
+        title
+        description
+        year
+        ktloTarget
+        status
+        createdAt
+        updatedAt
+        __typename
+      }
+      Manager {
+        id
+        alias
+        name
+        email
+        status
+        sixManagerAlias
+        isManager
+        isBizOps
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Manager {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Organization {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        personPlanId
+        personManagerId
+        personOrganizationId
+        createdAt
+        updatedAt
+        __typename
+      }
+      Organization {
+        id
+        name
+        description
+        headcount
+        incTarget
+        mgrTarget
+        icTarget
+        peTarget
+        pmTarget
+        tpmTarget
+        argTarget
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Manager {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Parent {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        organizationPlanId
+        organizationManagerId
+        organizationParentId
+        createdAt
+        updatedAt
+        __typename
+      }
+      personPlanId
+      personManagerId
+      personOrganizationId
       createdAt
       updatedAt
       __typename
@@ -523,6 +2049,151 @@ export const deletePerson = /* GraphQL */ `
       alias
       name
       email
+      status
+      sixManagerAlias
+      isManager
+      isBizOps
+      Plan {
+        id
+        title
+        description
+        year
+        ktloTarget
+        status
+        createdAt
+        updatedAt
+        __typename
+      }
+      Manager {
+        id
+        alias
+        name
+        email
+        status
+        sixManagerAlias
+        isManager
+        isBizOps
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Manager {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Organization {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        personPlanId
+        personManagerId
+        personOrganizationId
+        createdAt
+        updatedAt
+        __typename
+      }
+      Organization {
+        id
+        name
+        description
+        headcount
+        incTarget
+        mgrTarget
+        icTarget
+        peTarget
+        pmTarget
+        tpmTarget
+        argTarget
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Manager {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Parent {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        organizationPlanId
+        organizationManagerId
+        organizationParentId
+        createdAt
+        updatedAt
+        __typename
+      }
+      personPlanId
+      personManagerId
+      personOrganizationId
       createdAt
       updatedAt
       __typename
@@ -539,20 +2210,22 @@ export const createOrganization = /* GraphQL */ `
       name
       description
       headcount
-      Teams {
-        items {
-          id
-          name
-          description
-          headcount
-          organizationID
-          createdAt
-          updatedAt
-          teamManagerId
-          teamInputGoalId
-          __typename
-        }
-        nextToken
+      incTarget
+      mgrTarget
+      icTarget
+      peTarget
+      pmTarget
+      tpmTarget
+      argTarget
+      Plan {
+        id
+        title
+        description
+        year
+        ktloTarget
+        status
+        createdAt
+        updatedAt
         __typename
       }
       Manager {
@@ -560,31 +2233,133 @@ export const createOrganization = /* GraphQL */ `
         alias
         name
         email
-        createdAt
-        updatedAt
-        __typename
-      }
-      OutputGoals {
-        items {
+        status
+        sixManagerAlias
+        isManager
+        isBizOps
+        Plan {
           id
           title
           description
+          year
+          ktloTarget
           status
-          class
-          start
-          end
-          organizationID
           createdAt
           updatedAt
           __typename
         }
-        nextToken
+        Manager {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Organization {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        personPlanId
+        personManagerId
+        personOrganizationId
+        createdAt
+        updatedAt
         __typename
       }
-      planID
+      Parent {
+        id
+        name
+        description
+        headcount
+        incTarget
+        mgrTarget
+        icTarget
+        peTarget
+        pmTarget
+        tpmTarget
+        argTarget
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Manager {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Parent {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        organizationPlanId
+        organizationManagerId
+        organizationParentId
+        createdAt
+        updatedAt
+        __typename
+      }
+      organizationPlanId
+      organizationManagerId
+      organizationParentId
       createdAt
       updatedAt
-      organizationManagerId
       __typename
     }
   }
@@ -599,20 +2374,22 @@ export const updateOrganization = /* GraphQL */ `
       name
       description
       headcount
-      Teams {
-        items {
-          id
-          name
-          description
-          headcount
-          organizationID
-          createdAt
-          updatedAt
-          teamManagerId
-          teamInputGoalId
-          __typename
-        }
-        nextToken
+      incTarget
+      mgrTarget
+      icTarget
+      peTarget
+      pmTarget
+      tpmTarget
+      argTarget
+      Plan {
+        id
+        title
+        description
+        year
+        ktloTarget
+        status
+        createdAt
+        updatedAt
         __typename
       }
       Manager {
@@ -620,31 +2397,133 @@ export const updateOrganization = /* GraphQL */ `
         alias
         name
         email
-        createdAt
-        updatedAt
-        __typename
-      }
-      OutputGoals {
-        items {
+        status
+        sixManagerAlias
+        isManager
+        isBizOps
+        Plan {
           id
           title
           description
+          year
+          ktloTarget
           status
-          class
-          start
-          end
-          organizationID
           createdAt
           updatedAt
           __typename
         }
-        nextToken
+        Manager {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Organization {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        personPlanId
+        personManagerId
+        personOrganizationId
+        createdAt
+        updatedAt
         __typename
       }
-      planID
+      Parent {
+        id
+        name
+        description
+        headcount
+        incTarget
+        mgrTarget
+        icTarget
+        peTarget
+        pmTarget
+        tpmTarget
+        argTarget
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Manager {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Parent {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        organizationPlanId
+        organizationManagerId
+        organizationParentId
+        createdAt
+        updatedAt
+        __typename
+      }
+      organizationPlanId
+      organizationManagerId
+      organizationParentId
       createdAt
       updatedAt
-      organizationManagerId
       __typename
     }
   }
@@ -659,20 +2538,22 @@ export const deleteOrganization = /* GraphQL */ `
       name
       description
       headcount
-      Teams {
-        items {
-          id
-          name
-          description
-          headcount
-          organizationID
-          createdAt
-          updatedAt
-          teamManagerId
-          teamInputGoalId
-          __typename
-        }
-        nextToken
+      incTarget
+      mgrTarget
+      icTarget
+      peTarget
+      pmTarget
+      tpmTarget
+      argTarget
+      Plan {
+        id
+        title
+        description
+        year
+        ktloTarget
+        status
+        createdAt
+        updatedAt
         __typename
       }
       Manager {
@@ -680,31 +2561,133 @@ export const deleteOrganization = /* GraphQL */ `
         alias
         name
         email
-        createdAt
-        updatedAt
-        __typename
-      }
-      OutputGoals {
-        items {
+        status
+        sixManagerAlias
+        isManager
+        isBizOps
+        Plan {
           id
           title
           description
+          year
+          ktloTarget
           status
-          class
-          start
-          end
-          organizationID
           createdAt
           updatedAt
           __typename
         }
-        nextToken
+        Manager {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Organization {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        personPlanId
+        personManagerId
+        personOrganizationId
+        createdAt
+        updatedAt
         __typename
       }
-      planID
+      Parent {
+        id
+        name
+        description
+        headcount
+        incTarget
+        mgrTarget
+        icTarget
+        peTarget
+        pmTarget
+        tpmTarget
+        argTarget
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Manager {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Parent {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        organizationPlanId
+        organizationManagerId
+        organizationParentId
+        createdAt
+        updatedAt
+        __typename
+      }
+      organizationPlanId
+      organizationManagerId
+      organizationParentId
       createdAt
       updatedAt
-      organizationManagerId
       __typename
     }
   }
@@ -719,22 +2702,106 @@ export const createInitiative = /* GraphQL */ `
       title
       description
       rank
-      themeID
-      planID
+      bucket
       status
+      Plan {
+        id
+        title
+        description
+        year
+        ktloTarget
+        status
+        createdAt
+        updatedAt
+        __typename
+      }
+      Theme {
+        id
+        title
+        description
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        themePlanId
+        createdAt
+        updatedAt
+        __typename
+      }
       Sponsor {
         id
         alias
         name
         email
+        status
+        sixManagerAlias
+        isManager
+        isBizOps
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Manager {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Organization {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        personPlanId
+        personManagerId
+        personOrganizationId
         createdAt
         updatedAt
         __typename
       }
-      bucket
+      initiativePlanId
+      initiativeThemeId
+      initiativeSponsorId
       createdAt
       updatedAt
-      initiativeSponsorId
       __typename
     }
   }
@@ -749,22 +2816,106 @@ export const updateInitiative = /* GraphQL */ `
       title
       description
       rank
-      themeID
-      planID
+      bucket
       status
+      Plan {
+        id
+        title
+        description
+        year
+        ktloTarget
+        status
+        createdAt
+        updatedAt
+        __typename
+      }
+      Theme {
+        id
+        title
+        description
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        themePlanId
+        createdAt
+        updatedAt
+        __typename
+      }
       Sponsor {
         id
         alias
         name
         email
+        status
+        sixManagerAlias
+        isManager
+        isBizOps
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Manager {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Organization {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        personPlanId
+        personManagerId
+        personOrganizationId
         createdAt
         updatedAt
         __typename
       }
-      bucket
+      initiativePlanId
+      initiativeThemeId
+      initiativeSponsorId
       createdAt
       updatedAt
-      initiativeSponsorId
       __typename
     }
   }
@@ -779,22 +2930,106 @@ export const deleteInitiative = /* GraphQL */ `
       title
       description
       rank
-      themeID
-      planID
+      bucket
       status
+      Plan {
+        id
+        title
+        description
+        year
+        ktloTarget
+        status
+        createdAt
+        updatedAt
+        __typename
+      }
+      Theme {
+        id
+        title
+        description
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        themePlanId
+        createdAt
+        updatedAt
+        __typename
+      }
       Sponsor {
         id
         alias
         name
         email
+        status
+        sixManagerAlias
+        isManager
+        isBizOps
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Manager {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Organization {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        personPlanId
+        personManagerId
+        personOrganizationId
         createdAt
         updatedAt
         __typename
       }
-      bucket
+      initiativePlanId
+      initiativeThemeId
+      initiativeSponsorId
       createdAt
       updatedAt
-      initiativeSponsorId
       __typename
     }
   }
@@ -808,25 +3043,18 @@ export const createTheme = /* GraphQL */ `
       id
       title
       description
-      planID
-      Initiatives {
-        items {
-          id
-          title
-          description
-          rank
-          themeID
-          planID
-          status
-          bucket
-          createdAt
-          updatedAt
-          initiativeSponsorId
-          __typename
-        }
-        nextToken
+      Plan {
+        id
+        title
+        description
+        year
+        ktloTarget
+        status
+        createdAt
+        updatedAt
         __typename
       }
+      themePlanId
       createdAt
       updatedAt
       __typename
@@ -842,25 +3070,18 @@ export const updateTheme = /* GraphQL */ `
       id
       title
       description
-      planID
-      Initiatives {
-        items {
-          id
-          title
-          description
-          rank
-          themeID
-          planID
-          status
-          bucket
-          createdAt
-          updatedAt
-          initiativeSponsorId
-          __typename
-        }
-        nextToken
+      Plan {
+        id
+        title
+        description
+        year
+        ktloTarget
+        status
+        createdAt
+        updatedAt
         __typename
       }
+      themePlanId
       createdAt
       updatedAt
       __typename
@@ -876,25 +3097,18 @@ export const deleteTheme = /* GraphQL */ `
       id
       title
       description
-      planID
-      Initiatives {
-        items {
-          id
-          title
-          description
-          rank
-          themeID
-          planID
-          status
-          bucket
-          createdAt
-          updatedAt
-          initiativeSponsorId
-          __typename
-        }
-        nextToken
+      Plan {
+        id
+        title
+        description
+        year
+        ktloTarget
+        status
+        createdAt
+        updatedAt
         __typename
       }
+      themePlanId
       createdAt
       updatedAt
       __typename
@@ -911,52 +3125,8 @@ export const createPlan = /* GraphQL */ `
       title
       description
       year
-      Themes {
-        items {
-          id
-          title
-          description
-          planID
-          createdAt
-          updatedAt
-          __typename
-        }
-        nextToken
-        __typename
-      }
-      Initiatives {
-        items {
-          id
-          title
-          description
-          rank
-          themeID
-          planID
-          status
-          bucket
-          createdAt
-          updatedAt
-          initiativeSponsorId
-          __typename
-        }
-        nextToken
-        __typename
-      }
-      Organizations {
-        items {
-          id
-          name
-          description
-          headcount
-          planID
-          createdAt
-          updatedAt
-          organizationManagerId
-          __typename
-        }
-        nextToken
-        __typename
-      }
+      ktloTarget
+      status
       createdAt
       updatedAt
       __typename
@@ -973,52 +3143,8 @@ export const updatePlan = /* GraphQL */ `
       title
       description
       year
-      Themes {
-        items {
-          id
-          title
-          description
-          planID
-          createdAt
-          updatedAt
-          __typename
-        }
-        nextToken
-        __typename
-      }
-      Initiatives {
-        items {
-          id
-          title
-          description
-          rank
-          themeID
-          planID
-          status
-          bucket
-          createdAt
-          updatedAt
-          initiativeSponsorId
-          __typename
-        }
-        nextToken
-        __typename
-      }
-      Organizations {
-        items {
-          id
-          name
-          description
-          headcount
-          planID
-          createdAt
-          updatedAt
-          organizationManagerId
-          __typename
-        }
-        nextToken
-        __typename
-      }
+      ktloTarget
+      status
       createdAt
       updatedAt
       __typename
@@ -1035,52 +3161,8 @@ export const deletePlan = /* GraphQL */ `
       title
       description
       year
-      Themes {
-        items {
-          id
-          title
-          description
-          planID
-          createdAt
-          updatedAt
-          __typename
-        }
-        nextToken
-        __typename
-      }
-      Initiatives {
-        items {
-          id
-          title
-          description
-          rank
-          themeID
-          planID
-          status
-          bucket
-          createdAt
-          updatedAt
-          initiativeSponsorId
-          __typename
-        }
-        nextToken
-        __typename
-      }
-      Organizations {
-        items {
-          id
-          name
-          description
-          headcount
-          planID
-          createdAt
-          updatedAt
-          organizationManagerId
-          __typename
-        }
-        nextToken
-        __typename
-      }
+      ktloTarget
+      status
       createdAt
       updatedAt
       __typename

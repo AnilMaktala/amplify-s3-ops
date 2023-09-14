@@ -1,105 +1,95 @@
-import React, { useState, useEffect } from "react";
-import FormField from "@cloudscape-design/components/form-field";
-import Input from "@cloudscape-design/components/input";
-import Form from "@cloudscape-design/components/form";
-import {
-  Box,
-  Button,
-  CollectionPreferences,
-  Header,
-  Pagination,
-  Table,
-  TextFilter,
-  Container,
-  Select,
-} from "@cloudscape-design/components";
-import SpaceBetween from "@cloudscape-design/components/space-between";
-import { Amplify, API, graphqlOperation } from "aws-amplify";
-import { createTheme } from "../../graphql/mutations";
-import { listPlans } from "../../graphql/queries";
+import React, { useState, useEffect } from 'react';
+import { FormField, Input, Form, ColumnLayout, Textarea } from "@cloudscape-design/components";
+import { Button, Header, Container, SpaceBetween } from '@cloudscape-design/components';
+import { Cache } from 'aws-amplify'
 
-function ThemeForm({ setShowForm, trigger }) {
+import { fetchTheme, modifyTheme, makeTheme } from '../../common/graphqlHelper';
+import { checkNotEmpty } from '../../common/validationHelper';
+
+function ThemeForm({ setShowForm, trigger, plan, org, isb, editId }) {
+  const [planId, setThemeId] = useState();
+  const [id, setId] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [selectedPlan, setSelectedPlan] = React.useState({
-    label: "Option 1",
-    value: "1",
-  });
-  const [plans, setPlans] = useState([]);
 
-  const [state, setState] = useState({
-    title: "",
-    description: "",
-    planID: 0,
-  });
-  function handleChange() {
-    state.title = title;
-    state.description = description;
-    state.planID = selectedPlan.value;
-  }
-  const load = async () => {
-    const res = await API.graphql({
-      query: listPlans,
-    });
-    console.log(res.data.listPlans);
-    res.data.listPlans.items.forEach((value) => {
-      plans.push({
-        key: value.id,
-        value: value.title,
-      });
-    });
-    // Update the options state
-    setPlans([{ key: "Select a plan", value: "" }, ...plans]);
-    //setAllItems(res.data.listPlans.items);
+  const load = async (id) => {
+    fetchTheme(id).then((res) => { setThemeState(res) });
   };
+
+  /* fetch plan when component loads if edit */
   useEffect(() => {
-    load();
+    let plan = Cache.getItem("activePlan");
+    if (plan) {
+      setThemeId(plan.id);
+    } else {
+      handleCancel();
+    }
+    if (editId) {
+      setId(editId);
+      load(editId);
+    }
   }, []);
 
+  async function setThemeState(themeData) {
+    setTitle(themeData.title);
+    setDescription(themeData.description);
+  }
+  const handleCancel = () => {
+    setShowForm(false) // Hide the form
+  };
+
+  function handleChange() {
+    if (!(checkNotEmpty(title))) {
+      let update = {
+        title: title,
+        description: (description === "" ? title : description),
+        themePlanId: planId
+      };
+      try {
+        let id = Cache.getItem("editId");
+        if (id) { modifyTheme({ ...update, id }).then((res) => { console.log(res); }); }
+        else { makeTheme(update).then((res) => { console.log(res); }); }
+      }
+      catch (e) { console.log("Make/Update Theme: " + e) }
+    }
+  };
   return (
     <form
       onSubmit={(event) => {
         event.preventDefault();
-
-        try {
-          handleChange();
-          const response = API.graphql(
-            graphqlOperation(createTheme, { input: state })
-          );
-          setShowForm(false);
-          trigger();
-        } catch {
-          console.log("error");
-        }
+        handleChange();
+        setShowForm(false);
+        trigger();
       }}
     >
-      <Form
-        actions={
-          <SpaceBetween direction="horizontal" size="xs">
-            <Button formAction="none" variant="link">
-              Cancel
-            </Button>
-            <Button formAction="submit" variant="primary">
-              Submit
-            </Button>
-          </SpaceBetween>
-        }
-      >
-        <Container header={<Header variant="h2">Add Theme</Header>}>
-          <SpaceBetween direction="vertical" size="l">
-            <FormField label="Title">
-              <Input
-                type="text"
-                name="title"
-                value={title}
-                onChange={({ detail }) => {
-                  setTitle(detail.value);
-                }}
-              />
-            </FormField>
+      <Form>
+        <Container header={<Header variant="h2"
+          actions={
+            <SpaceBetween direction="horizontal" size="xs">
+              <Button formAction="submit" type="submit" onClick={handleCancel} variant="link"> Cancel</Button>
+              <Button formAction="submit" variant="primary">Submit</Button>
+            </SpaceBetween>
+          }>
+          {editId ? "Edit Theme" : "Add Theme"}
+        </Header>}>
+          <ColumnLayout borders="vertical" columns={2}>
+            <SpaceBetween direction="vertical" size="l">
+              <FormField label="Title"
+                errorText={checkNotEmpty(title)}
+              >
+                <Input
+                  type="text"
+                  name="title"
+                  value={title}
+                  onChange={({ detail }) => {
+                    setTitle(detail.value);
+                  }}
+                />
+              </FormField>
+            </SpaceBetween>
             <FormField label="Description">
-              <Input
-                type="text"
+              <Textarea
+                rows={5}
                 name="description"
                 value={description}
                 onChange={({ detail }) => {
@@ -107,19 +97,7 @@ function ThemeForm({ setShowForm, trigger }) {
                 }}
               />
             </FormField>
-            <FormField
-              label="PlanID"
-              secondaryControl={<Button iconName="refresh" />}
-            >
-              <Select
-                selectedOption={selectedPlan}
-                onChange={({ detail }) =>
-                  setSelectedPlan(detail.selectedOption)
-                }
-                options={plans}
-              />
-            </FormField>
-          </SpaceBetween>
+          </ColumnLayout>
         </Container>
       </Form>
     </form>

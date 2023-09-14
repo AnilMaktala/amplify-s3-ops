@@ -1,73 +1,189 @@
+# This "input" configures a global authorization rule to enable public access to
+# all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
+input AMPLIFY {
+  globalAuthRule: AuthRule = { allow: public }
+} # FOR TESTING ONLY!
+enum SNAP {
+  ON
+  OFF
+}
+
 enum Bucket {
+  KTLO
   TOPN
   XORG
+  ORGN
   CUT
 }
 
-type OutputGoal @model @auth(rules: [{ allow: public }]) {
-  id: ID!
-  title: String!
-  description: String!
-  status: Status
-  class: Goal
-  start: AWSDate
-  end: AWSDate
-  organizationID: ID! @index(name: "byOrganization")
-  InputGoals: [InputGoal] @hasMany(indexName: "byOutputGoal", fields: ["id"])
+enum GoalType {
+  OUTCOME
+  OUTPUT
+  INPUT
+  TEAM
 }
 
-enum Goal {
+enum GoalClass {
   STEAM
   AWS
   S3
   TEAM
 }
 
-type InputGoal @model @auth(rules: [{ allow: public }]) {
-  id: ID!
-  title: String!
-  description: String!
-  status: Status
-  class: Goal
-  start: AWSDate
-  end: AWSDate
-  outputgoalID: ID! @index(name: "byOutputGoal")
-}
-
 enum Funding {
   FLAT
   INC
-  ASK
   CUT
+  NA
+}
+
+enum Status {
+  PROPOSED
+  ACTIVE
+  DELETED
+  LOCKED
+}
+
+type Snapshot @model @auth(rules: [{ allow: public }]) {
+  id: ID!
+  timestamp: AWSDateTime!
+    @index(
+      name: "SnapshotByDate"
+      queryField: "SnapshotByDate"
+      sortKeyFields: ["planTitle"]
+    )
+  planYear: Float
+  planTitle: String
+  projectTitle: String
+  projectDescription: String
+  projectRank: Float
+  projectFunding: String
+  projectHeadcount: Float
+  initiativeTitle: String
+  initiativeDescription: String
+  organizationName: String
+  organizationManagerAlias: String
+  ownerAlias: String
+  goalTitle: String
+  goalDescription: String
+  snapshotPlanId: ID!
+    @index(
+      name: "SnapshotsByPlan"
+      queryField: "SnapshotsByPlan"
+      sortKeyFields: ["timestamp"]
+    )
+  snapshotProjectId: ID!
+    @index(
+      name: "SnapshotsByProject"
+      queryField: "SnapshotsByProject"
+      sortKeyFields: ["timestamp"]
+    )
+}
+
+type Goal @model @auth(rules: [{ allow: public }]) {
+  id: ID!
+  title: String!
+  description: String!
+  status: Status!
+  type: GoalType!
+  class: GoalClass!
+  start: AWSDate!
+  end: AWSDate!
+  Plan: Plan! @hasOne
+  Organization: Organization! @hasOne
+  Owner: Person! @hasOne
+  Parent: Goal @hasOne
+  goalPlanId: ID!
+    @index(
+      name: "GoalsByPlan"
+      queryField: "GoalsByPlan"
+      sortKeyFields: ["type"]
+    )
+  goalOrganizationId: ID!
+    @index(
+      name: "GoalsByOrganization"
+      queryField: "GoalsByOrganization"
+      sortKeyFields: ["type"]
+    )
+  goalOwnerId: ID!
+    @index(
+      name: "GoalsByOwner"
+      queryField: "GoalsByOwner"
+      sortKeyFields: ["type"]
+    )
+  goalParentId: ID! @index(name: "GoalsByParent", queryField: "GoalsByParent")
 }
 
 type Project @model @auth(rules: [{ allow: public }]) {
   id: ID!
   title: String!
-  description: String
+  description: String!
   rank: Float!
-  priority: Funding
-  headcount: Float
-  Owner: Person @hasOne
-  Sponsor: Person @hasOne
-  Initiative: Initiative @hasOne
-}
-
-type Team @model @auth(rules: [{ allow: public }]) {
-  id: ID!
-  name: String!
-  description: String
-  headcount: Int!
-  organizationID: ID! @index(name: "byOrganization")
-  Manager: Person @hasOne
-  InputGoal: InputGoal @hasOne
+  funding: Funding!
+  headcount: Float!
+  Plan: Plan! @hasOne
+  Initiative: Initiative! @hasOne
+  Organization: Organization! @hasOne
+  Owner: Person! @hasOne
+  Goal: Goal @hasOne
+  projectPlanId: ID!
+    @index(
+      name: "ProjectsByPlan"
+      queryField: "ProjectsByPlan"
+      sortKeyFields: ["projectOrganizationId"]
+    )
+  projectInitiativeId: ID!
+    @index(
+      name: "ProjectsByInitiative"
+      queryField: "ProjectsByInitiative"
+      sortKeyFields: ["funding"]
+    )
+  projectOrganizationId: ID!
+    @index(
+      name: "ProjectsByOrganization"
+      queryField: "ProjectsByOrganization"
+      sortKeyFields: ["funding"]
+    )
+  projectOwnerId: ID!
+    @index(
+      name: "ProjectsByOwner"
+      queryField: "ProjectsByOwner"
+      sortKeyFields: ["projectPlanId"]
+    )
+  projectGoalId: ID
+    @index(name: "ProjectsByParent", queryField: "ProjectsByParent")
 }
 
 type Person @model @auth(rules: [{ allow: public }]) {
   id: ID!
-  alias: String!
+  alias: String! @index(name: "PersonsByAlias", queryField: "PersonsByAlias")
   name: String!
   email: String
+  status: Status
+  sixManagerAlias: String
+  isManager: Boolean
+  isBizOps: Boolean
+  Plan: Plan @hasOne
+  Manager: Person @hasOne
+  Organization: Organization @hasOne
+  personPlanId: ID
+    @index(
+      name: "PersonsByPlan"
+      queryField: "PersonsByPlan"
+      sortKeyFields: ["personOrganizationId"]
+    )
+  personManagerId: ID
+    @index(
+      name: "PersonsByManager"
+      queryField: "PersonsByManager"
+      sortKeyFields: ["personPlanId"]
+    )
+  personOrganizationId: ID!
+    @index(
+      name: "PersonsByOrganization"
+      queryField: "PersonsByOrganization"
+      sortKeyFields: ["personManagerId"]
+    )
 }
 
 type Organization @model @auth(rules: [{ allow: public }]) {
@@ -75,17 +191,22 @@ type Organization @model @auth(rules: [{ allow: public }]) {
   name: String!
   description: String
   headcount: Int!
-  Teams: [Team] @hasMany(indexName: "byOrganization", fields: ["id"])
-  Manager: Person @hasOne
-  OutputGoals: [OutputGoal]
-    @hasMany(indexName: "byOrganization", fields: ["id"])
-  planID: ID! @index(name: "byPlan")
-}
-
-enum Status {
-  PROPOSED
-  ACTIVE
-  CANCELLED
+  incTarget: Int!
+  mgrTarget: Int!
+  icTarget: Int!
+  peTarget: Int!
+  pmTarget: Int!
+  tpmTarget: Int!
+  argTarget: Int!
+  Plan: Plan! @hasOne
+  Manager: Person! @hasOne
+  Parent: Organization @hasOne
+  organizationPlanId: ID!
+    @index(name: "OrganizationsByPlan", queryField: "OrganizationsByPlan")
+  organizationManagerId: ID
+    @index(name: "OrganizationsByManager", queryField: "OrganizationsByManager")
+  organizationParentId: ID
+    @index(name: "OrganizationsByParent", queryField: "OrganizationsByParent")
 }
 
 type Initiative @model @auth(rules: [{ allow: public }]) {
@@ -93,19 +214,29 @@ type Initiative @model @auth(rules: [{ allow: public }]) {
   title: String!
   description: String
   rank: Float
-  themeID: ID! @index(name: "byTheme")
-  planID: ID! @index(name: "byPlan")
-  status: Status!
-  Sponsor: Person @hasOne
   bucket: Bucket
+  status: Status!
+  Plan: Plan! @hasOne
+  Theme: Theme! @hasOne
+  Sponsor: Person @hasOne
+  initiativePlanId: ID!
+    @index(
+      name: "InitiativesByPlan"
+      queryField: "InitiativesByPlan"
+      sortKeyFields: ["bucket"]
+    )
+  initiativeThemeId: ID!
+    @index(name: "InitiativesByTheme", queryField: "InitiativesByTheme")
+  initiativeSponsorId: ID
+    @index(name: "InitiativesBySponsor", queryField: "InitiativesBySponsor")
 }
 
 type Theme @model @auth(rules: [{ allow: public }]) {
   id: ID!
   title: String!
   description: String
-  planID: ID! @index(name: "byPlan")
-  Initiatives: [Initiative] @hasMany(indexName: "byTheme", fields: ["id"])
+  Plan: Plan! @hasOne
+  themePlanId: ID! @index(name: "ThemesByPlan", queryField: "ThemesByPlan")
 }
 
 type Plan @model @auth(rules: [{ allow: public }]) {
@@ -113,7 +244,31 @@ type Plan @model @auth(rules: [{ allow: public }]) {
   title: String!
   description: String
   year: Int!
-  Themes: [Theme] @hasMany(indexName: "byPlan", fields: ["id"])
-  Initiatives: [Initiative] @hasMany(indexName: "byPlan", fields: ["id"])
-  Organizations: [Organization] @hasMany(indexName: "byPlan", fields: ["id"])
+  ktloTarget: Float!
+  status: Status! @index(name: "PlansByStatus", queryField: "PlansByStatus")
+}
+
+input BatchCreateSnapshotInput {
+  id: ID
+  timestamp: AWSDateTime!
+  planYear: Float
+  planTitle: String
+  projectTitle: String
+  projectDescription: String
+  projectRank: Float
+  projectFunding: String
+  projectHeadcount: Float
+  initiativeTitle: String
+  initiativeDescription: String
+  organizationName: String
+  organizationManagerAlias: String
+  ownerAlias: String
+  goalTitle: String
+  goalDescription: String
+  snapshotPlanId: ID!
+  snapshotProjectId: ID!
+}
+
+type Mutation {
+  batchCreateSnapshots(input: [BatchCreateSnapshotInput!]): [Snapshot]
 }

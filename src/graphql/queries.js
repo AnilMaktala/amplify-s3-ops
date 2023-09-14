@@ -1,60 +1,525 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getOutputGoal = /* GraphQL */ `
-  query GetOutputGoal($id: ID!) {
-    getOutputGoal(id: $id) {
+export const getSnapshot = /* GraphQL */ `
+  query GetSnapshot($id: ID!) {
+    getSnapshot(id: $id) {
+      id
+      timestamp
+      planYear
+      planTitle
+      projectTitle
+      projectDescription
+      projectRank
+      projectFunding
+      projectHeadcount
+      initiativeTitle
+      initiativeDescription
+      organizationName
+      organizationManagerAlias
+      ownerAlias
+      goalTitle
+      goalDescription
+      snapshotPlanId
+      snapshotProjectId
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const listSnapshots = /* GraphQL */ `
+  query ListSnapshots(
+    $filter: ModelSnapshotFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listSnapshots(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        timestamp
+        planYear
+        planTitle
+        projectTitle
+        projectDescription
+        projectRank
+        projectFunding
+        projectHeadcount
+        initiativeTitle
+        initiativeDescription
+        organizationName
+        organizationManagerAlias
+        ownerAlias
+        goalTitle
+        goalDescription
+        snapshotPlanId
+        snapshotProjectId
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const SnapshotByDate = /* GraphQL */ `
+  query SnapshotByDate(
+    $timestamp: AWSDateTime!
+    $planTitle: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelSnapshotFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    SnapshotByDate(
+      timestamp: $timestamp
+      planTitle: $planTitle
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        timestamp
+        planYear
+        planTitle
+        projectTitle
+        projectDescription
+        projectRank
+        projectFunding
+        projectHeadcount
+        initiativeTitle
+        initiativeDescription
+        organizationName
+        organizationManagerAlias
+        ownerAlias
+        goalTitle
+        goalDescription
+        snapshotPlanId
+        snapshotProjectId
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const SnapshotsByPlan = /* GraphQL */ `
+  query SnapshotsByPlan(
+    $snapshotPlanId: ID!
+    $timestamp: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelSnapshotFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    SnapshotsByPlan(
+      snapshotPlanId: $snapshotPlanId
+      timestamp: $timestamp
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        timestamp
+        planYear
+        planTitle
+        projectTitle
+        projectDescription
+        projectRank
+        projectFunding
+        projectHeadcount
+        initiativeTitle
+        initiativeDescription
+        organizationName
+        organizationManagerAlias
+        ownerAlias
+        goalTitle
+        goalDescription
+        snapshotPlanId
+        snapshotProjectId
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const SnapshotsByProject = /* GraphQL */ `
+  query SnapshotsByProject(
+    $snapshotProjectId: ID!
+    $timestamp: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelSnapshotFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    SnapshotsByProject(
+      snapshotProjectId: $snapshotProjectId
+      timestamp: $timestamp
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        timestamp
+        planYear
+        planTitle
+        projectTitle
+        projectDescription
+        projectRank
+        projectFunding
+        projectHeadcount
+        initiativeTitle
+        initiativeDescription
+        organizationName
+        organizationManagerAlias
+        ownerAlias
+        goalTitle
+        goalDescription
+        snapshotPlanId
+        snapshotProjectId
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const getGoal = /* GraphQL */ `
+  query GetGoal($id: ID!) {
+    getGoal(id: $id) {
       id
       title
       description
       status
+      type
       class
       start
       end
-      organizationID
-      InputGoals {
-        items {
+      Plan {
+        id
+        title
+        description
+        year
+        ktloTarget
+        status
+        createdAt
+        updatedAt
+        __typename
+      }
+      Organization {
+        id
+        name
+        description
+        headcount
+        incTarget
+        mgrTarget
+        icTarget
+        peTarget
+        pmTarget
+        tpmTarget
+        argTarget
+        Plan {
           id
           title
           description
+          year
+          ktloTarget
           status
-          class
-          start
-          end
-          outputgoalID
           createdAt
           updatedAt
           __typename
         }
-        nextToken
+        Manager {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Parent {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        organizationPlanId
+        organizationManagerId
+        organizationParentId
+        createdAt
+        updatedAt
         __typename
       }
+      Owner {
+        id
+        alias
+        name
+        email
+        status
+        sixManagerAlias
+        isManager
+        isBizOps
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Manager {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Organization {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        personPlanId
+        personManagerId
+        personOrganizationId
+        createdAt
+        updatedAt
+        __typename
+      }
+      Parent {
+        id
+        title
+        description
+        status
+        type
+        class
+        start
+        end
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Organization {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Owner {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Parent {
+          id
+          title
+          description
+          status
+          type
+          class
+          start
+          end
+          goalPlanId
+          goalOrganizationId
+          goalOwnerId
+          goalParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        goalPlanId
+        goalOrganizationId
+        goalOwnerId
+        goalParentId
+        createdAt
+        updatedAt
+        __typename
+      }
+      goalPlanId
+      goalOrganizationId
+      goalOwnerId
+      goalParentId
       createdAt
       updatedAt
       __typename
     }
   }
 `;
-export const listOutputGoals = /* GraphQL */ `
-  query ListOutputGoals(
-    $filter: ModelOutputGoalFilterInput
+export const listGoals = /* GraphQL */ `
+  query ListGoals(
+    $filter: ModelGoalFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listOutputGoals(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listGoals(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
         title
         description
         status
+        type
         class
         start
         end
-        organizationID
-        InputGoals {
-          nextToken
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
           __typename
         }
+        Organization {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Owner {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Parent {
+          id
+          title
+          description
+          status
+          type
+          class
+          start
+          end
+          goalPlanId
+          goalOrganizationId
+          goalOwnerId
+          goalParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        goalPlanId
+        goalOrganizationId
+        goalOwnerId
+        goalParentId
         createdAt
         updatedAt
         __typename
@@ -64,16 +529,18 @@ export const listOutputGoals = /* GraphQL */ `
     }
   }
 `;
-export const outputGoalsByOrganizationID = /* GraphQL */ `
-  query OutputGoalsByOrganizationID(
-    $organizationID: ID!
+export const GoalsByPlan = /* GraphQL */ `
+  query GoalsByPlan(
+    $goalPlanId: ID!
+    $type: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
-    $filter: ModelOutputGoalFilterInput
+    $filter: ModelGoalFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    outputGoalsByOrganizationID(
-      organizationID: $organizationID
+    GoalsByPlan(
+      goalPlanId: $goalPlanId
+      type: $type
       sortDirection: $sortDirection
       filter: $filter
       limit: $limit
@@ -84,14 +551,77 @@ export const outputGoalsByOrganizationID = /* GraphQL */ `
         title
         description
         status
+        type
         class
         start
         end
-        organizationID
-        InputGoals {
-          nextToken
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
           __typename
         }
+        Organization {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Owner {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Parent {
+          id
+          title
+          description
+          status
+          type
+          class
+          start
+          end
+          goalPlanId
+          goalOrganizationId
+          goalOwnerId
+          goalParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        goalPlanId
+        goalOrganizationId
+        goalOwnerId
+        goalParentId
         createdAt
         updatedAt
         __typename
@@ -101,58 +631,18 @@ export const outputGoalsByOrganizationID = /* GraphQL */ `
     }
   }
 `;
-export const getInputGoal = /* GraphQL */ `
-  query GetInputGoal($id: ID!) {
-    getInputGoal(id: $id) {
-      id
-      title
-      description
-      status
-      class
-      start
-      end
-      outputgoalID
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const listInputGoals = /* GraphQL */ `
-  query ListInputGoals(
-    $filter: ModelInputGoalFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listInputGoals(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        title
-        description
-        status
-        class
-        start
-        end
-        outputgoalID
-        createdAt
-        updatedAt
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
-export const inputGoalsByOutputgoalID = /* GraphQL */ `
-  query InputGoalsByOutputgoalID(
-    $outputgoalID: ID!
+export const GoalsByOrganization = /* GraphQL */ `
+  query GoalsByOrganization(
+    $goalOrganizationId: ID!
+    $type: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
-    $filter: ModelInputGoalFilterInput
+    $filter: ModelGoalFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    inputGoalsByOutputgoalID(
-      outputgoalID: $outputgoalID
+    GoalsByOrganization(
+      goalOrganizationId: $goalOrganizationId
+      type: $type
       sortDirection: $sortDirection
       filter: $filter
       limit: $limit
@@ -163,10 +653,279 @@ export const inputGoalsByOutputgoalID = /* GraphQL */ `
         title
         description
         status
+        type
         class
         start
         end
-        outputgoalID
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Organization {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Owner {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Parent {
+          id
+          title
+          description
+          status
+          type
+          class
+          start
+          end
+          goalPlanId
+          goalOrganizationId
+          goalOwnerId
+          goalParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        goalPlanId
+        goalOrganizationId
+        goalOwnerId
+        goalParentId
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const GoalsByOwner = /* GraphQL */ `
+  query GoalsByOwner(
+    $goalOwnerId: ID!
+    $type: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelGoalFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    GoalsByOwner(
+      goalOwnerId: $goalOwnerId
+      type: $type
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        title
+        description
+        status
+        type
+        class
+        start
+        end
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Organization {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Owner {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Parent {
+          id
+          title
+          description
+          status
+          type
+          class
+          start
+          end
+          goalPlanId
+          goalOrganizationId
+          goalOwnerId
+          goalParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        goalPlanId
+        goalOrganizationId
+        goalOwnerId
+        goalParentId
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const GoalsByParent = /* GraphQL */ `
+  query GoalsByParent(
+    $goalParentId: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelGoalFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    GoalsByParent(
+      goalParentId: $goalParentId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        title
+        description
+        status
+        type
+        class
+        start
+        end
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Organization {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Owner {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Parent {
+          id
+          title
+          description
+          status
+          type
+          class
+          start
+          end
+          goalPlanId
+          goalOrganizationId
+          goalOwnerId
+          goalParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        goalPlanId
+        goalOrganizationId
+        goalOwnerId
+        goalParentId
         createdAt
         updatedAt
         __typename
@@ -183,22 +942,15 @@ export const getProject = /* GraphQL */ `
       title
       description
       rank
-      priority
+      funding
       headcount
-      Owner {
+      Plan {
         id
-        alias
-        name
-        email
-        createdAt
-        updatedAt
-        __typename
-      }
-      Sponsor {
-        id
-        alias
-        name
-        email
+        title
+        description
+        year
+        ktloTarget
+        status
         createdAt
         updatedAt
         __typename
@@ -208,29 +960,265 @@ export const getProject = /* GraphQL */ `
         title
         description
         rank
-        themeID
-        planID
+        bucket
         status
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Theme {
+          id
+          title
+          description
+          themePlanId
+          createdAt
+          updatedAt
+          __typename
+        }
         Sponsor {
           id
           alias
           name
           email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
           createdAt
           updatedAt
           __typename
         }
-        bucket
+        initiativePlanId
+        initiativeThemeId
+        initiativeSponsorId
         createdAt
         updatedAt
-        initiativeSponsorId
         __typename
       }
+      Organization {
+        id
+        name
+        description
+        headcount
+        incTarget
+        mgrTarget
+        icTarget
+        peTarget
+        pmTarget
+        tpmTarget
+        argTarget
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Manager {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Parent {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        organizationPlanId
+        organizationManagerId
+        organizationParentId
+        createdAt
+        updatedAt
+        __typename
+      }
+      Owner {
+        id
+        alias
+        name
+        email
+        status
+        sixManagerAlias
+        isManager
+        isBizOps
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Manager {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Organization {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        personPlanId
+        personManagerId
+        personOrganizationId
+        createdAt
+        updatedAt
+        __typename
+      }
+      Goal {
+        id
+        title
+        description
+        status
+        type
+        class
+        start
+        end
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Organization {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Owner {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Parent {
+          id
+          title
+          description
+          status
+          type
+          class
+          start
+          end
+          goalPlanId
+          goalOrganizationId
+          goalOwnerId
+          goalParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        goalPlanId
+        goalOrganizationId
+        goalOwnerId
+        goalParentId
+        createdAt
+        updatedAt
+        __typename
+      }
+      projectPlanId
+      projectInitiativeId
+      projectOrganizationId
+      projectOwnerId
+      projectGoalId
       createdAt
       updatedAt
-      projectOwnerId
-      projectSponsorId
-      projectInitiativeId
       __typename
     }
   }
@@ -247,22 +1235,15 @@ export const listProjects = /* GraphQL */ `
         title
         description
         rank
-        priority
+        funding
         headcount
-        Owner {
+        Plan {
           id
-          alias
-          name
-          email
-          createdAt
-          updatedAt
-          __typename
-        }
-        Sponsor {
-          id
-          alias
-          name
-          email
+          title
+          description
+          year
+          ktloTarget
+          status
           createdAt
           updatedAt
           __typename
@@ -272,104 +1253,74 @@ export const listProjects = /* GraphQL */ `
           title
           description
           rank
-          themeID
-          planID
-          status
           bucket
+          status
+          initiativePlanId
+          initiativeThemeId
+          initiativeSponsorId
           createdAt
           updatedAt
-          initiativeSponsorId
           __typename
         }
-        createdAt
-        updatedAt
-        projectOwnerId
-        projectSponsorId
-        projectInitiativeId
-        __typename
-      }
-      nextToken
-      __typename
-    }
-  }
-`;
-export const getTeam = /* GraphQL */ `
-  query GetTeam($id: ID!) {
-    getTeam(id: $id) {
-      id
-      name
-      description
-      headcount
-      organizationID
-      Manager {
-        id
-        alias
-        name
-        email
-        createdAt
-        updatedAt
-        __typename
-      }
-      InputGoal {
-        id
-        title
-        description
-        status
-        class
-        start
-        end
-        outputgoalID
-        createdAt
-        updatedAt
-        __typename
-      }
-      createdAt
-      updatedAt
-      teamManagerId
-      teamInputGoalId
-      __typename
-    }
-  }
-`;
-export const listTeams = /* GraphQL */ `
-  query ListTeams(
-    $filter: ModelTeamFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listTeams(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        name
-        description
-        headcount
-        organizationID
-        Manager {
+        Organization {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Owner {
           id
           alias
           name
           email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
           createdAt
           updatedAt
           __typename
         }
-        InputGoal {
+        Goal {
           id
           title
           description
           status
+          type
           class
           start
           end
-          outputgoalID
+          goalPlanId
+          goalOrganizationId
+          goalOwnerId
+          goalParentId
           createdAt
           updatedAt
           __typename
         }
+        projectPlanId
+        projectInitiativeId
+        projectOrganizationId
+        projectOwnerId
+        projectGoalId
         createdAt
         updatedAt
-        teamManagerId
-        teamInputGoalId
         __typename
       }
       nextToken
@@ -377,16 +1328,18 @@ export const listTeams = /* GraphQL */ `
     }
   }
 `;
-export const teamsByOrganizationID = /* GraphQL */ `
-  query TeamsByOrganizationID(
-    $organizationID: ID!
+export const ProjectsByPlan = /* GraphQL */ `
+  query ProjectsByPlan(
+    $projectPlanId: ID!
+    $projectOrganizationId: ModelIDKeyConditionInput
     $sortDirection: ModelSortDirection
-    $filter: ModelTeamFilterInput
+    $filter: ModelProjectFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    teamsByOrganizationID(
-      organizationID: $organizationID
+    ProjectsByPlan(
+      projectPlanId: $projectPlanId
+      projectOrganizationId: $projectOrganizationId
       sortDirection: $sortDirection
       filter: $filter
       limit: $limit
@@ -394,36 +1347,553 @@ export const teamsByOrganizationID = /* GraphQL */ `
     ) {
       items {
         id
-        name
+        title
         description
+        rank
+        funding
         headcount
-        organizationID
-        Manager {
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Initiative {
+          id
+          title
+          description
+          rank
+          bucket
+          status
+          initiativePlanId
+          initiativeThemeId
+          initiativeSponsorId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Organization {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Owner {
           id
           alias
           name
           email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
           createdAt
           updatedAt
           __typename
         }
-        InputGoal {
+        Goal {
           id
           title
           description
           status
+          type
           class
           start
           end
-          outputgoalID
+          goalPlanId
+          goalOrganizationId
+          goalOwnerId
+          goalParentId
           createdAt
           updatedAt
           __typename
         }
+        projectPlanId
+        projectInitiativeId
+        projectOrganizationId
+        projectOwnerId
+        projectGoalId
         createdAt
         updatedAt
-        teamManagerId
-        teamInputGoalId
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const ProjectsByInitiative = /* GraphQL */ `
+  query ProjectsByInitiative(
+    $projectInitiativeId: ID!
+    $funding: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelProjectFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    ProjectsByInitiative(
+      projectInitiativeId: $projectInitiativeId
+      funding: $funding
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        title
+        description
+        rank
+        funding
+        headcount
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Initiative {
+          id
+          title
+          description
+          rank
+          bucket
+          status
+          initiativePlanId
+          initiativeThemeId
+          initiativeSponsorId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Organization {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Owner {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Goal {
+          id
+          title
+          description
+          status
+          type
+          class
+          start
+          end
+          goalPlanId
+          goalOrganizationId
+          goalOwnerId
+          goalParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        projectPlanId
+        projectInitiativeId
+        projectOrganizationId
+        projectOwnerId
+        projectGoalId
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const ProjectsByOrganization = /* GraphQL */ `
+  query ProjectsByOrganization(
+    $projectOrganizationId: ID!
+    $funding: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelProjectFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    ProjectsByOrganization(
+      projectOrganizationId: $projectOrganizationId
+      funding: $funding
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        title
+        description
+        rank
+        funding
+        headcount
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Initiative {
+          id
+          title
+          description
+          rank
+          bucket
+          status
+          initiativePlanId
+          initiativeThemeId
+          initiativeSponsorId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Organization {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Owner {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Goal {
+          id
+          title
+          description
+          status
+          type
+          class
+          start
+          end
+          goalPlanId
+          goalOrganizationId
+          goalOwnerId
+          goalParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        projectPlanId
+        projectInitiativeId
+        projectOrganizationId
+        projectOwnerId
+        projectGoalId
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const ProjectsByOwner = /* GraphQL */ `
+  query ProjectsByOwner(
+    $projectOwnerId: ID!
+    $projectPlanId: ModelIDKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelProjectFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    ProjectsByOwner(
+      projectOwnerId: $projectOwnerId
+      projectPlanId: $projectPlanId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        title
+        description
+        rank
+        funding
+        headcount
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Initiative {
+          id
+          title
+          description
+          rank
+          bucket
+          status
+          initiativePlanId
+          initiativeThemeId
+          initiativeSponsorId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Organization {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Owner {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Goal {
+          id
+          title
+          description
+          status
+          type
+          class
+          start
+          end
+          goalPlanId
+          goalOrganizationId
+          goalOwnerId
+          goalParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        projectPlanId
+        projectInitiativeId
+        projectOrganizationId
+        projectOwnerId
+        projectGoalId
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const ProjectsByParent = /* GraphQL */ `
+  query ProjectsByParent(
+    $projectGoalId: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelProjectFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    ProjectsByParent(
+      projectGoalId: $projectGoalId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        title
+        description
+        rank
+        funding
+        headcount
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Initiative {
+          id
+          title
+          description
+          rank
+          bucket
+          status
+          initiativePlanId
+          initiativeThemeId
+          initiativeSponsorId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Organization {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Owner {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Goal {
+          id
+          title
+          description
+          status
+          type
+          class
+          start
+          end
+          goalPlanId
+          goalOrganizationId
+          goalOwnerId
+          goalParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        projectPlanId
+        projectInitiativeId
+        projectOrganizationId
+        projectOwnerId
+        projectGoalId
+        createdAt
+        updatedAt
         __typename
       }
       nextToken
@@ -438,6 +1908,151 @@ export const getPerson = /* GraphQL */ `
       alias
       name
       email
+      status
+      sixManagerAlias
+      isManager
+      isBizOps
+      Plan {
+        id
+        title
+        description
+        year
+        ktloTarget
+        status
+        createdAt
+        updatedAt
+        __typename
+      }
+      Manager {
+        id
+        alias
+        name
+        email
+        status
+        sixManagerAlias
+        isManager
+        isBizOps
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Manager {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Organization {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        personPlanId
+        personManagerId
+        personOrganizationId
+        createdAt
+        updatedAt
+        __typename
+      }
+      Organization {
+        id
+        name
+        description
+        headcount
+        incTarget
+        mgrTarget
+        icTarget
+        peTarget
+        pmTarget
+        tpmTarget
+        argTarget
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Manager {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Parent {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        organizationPlanId
+        organizationManagerId
+        organizationParentId
+        createdAt
+        updatedAt
+        __typename
+      }
+      personPlanId
+      personManagerId
+      personOrganizationId
       createdAt
       updatedAt
       __typename
@@ -456,6 +2071,393 @@ export const listPeople = /* GraphQL */ `
         alias
         name
         email
+        status
+        sixManagerAlias
+        isManager
+        isBizOps
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Manager {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Organization {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        personPlanId
+        personManagerId
+        personOrganizationId
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const PersonsByAlias = /* GraphQL */ `
+  query PersonsByAlias(
+    $alias: String!
+    $sortDirection: ModelSortDirection
+    $filter: ModelPersonFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    PersonsByAlias(
+      alias: $alias
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        alias
+        name
+        email
+        status
+        sixManagerAlias
+        isManager
+        isBizOps
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Manager {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Organization {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        personPlanId
+        personManagerId
+        personOrganizationId
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const PersonsByPlan = /* GraphQL */ `
+  query PersonsByPlan(
+    $personPlanId: ID!
+    $personOrganizationId: ModelIDKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelPersonFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    PersonsByPlan(
+      personPlanId: $personPlanId
+      personOrganizationId: $personOrganizationId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        alias
+        name
+        email
+        status
+        sixManagerAlias
+        isManager
+        isBizOps
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Manager {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Organization {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        personPlanId
+        personManagerId
+        personOrganizationId
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const PersonsByManager = /* GraphQL */ `
+  query PersonsByManager(
+    $personManagerId: ID!
+    $personPlanId: ModelIDKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelPersonFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    PersonsByManager(
+      personManagerId: $personManagerId
+      personPlanId: $personPlanId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        alias
+        name
+        email
+        status
+        sixManagerAlias
+        isManager
+        isBizOps
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Manager {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Organization {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        personPlanId
+        personManagerId
+        personOrganizationId
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const PersonsByOrganization = /* GraphQL */ `
+  query PersonsByOrganization(
+    $personOrganizationId: ID!
+    $personManagerId: ModelIDKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelPersonFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    PersonsByOrganization(
+      personOrganizationId: $personOrganizationId
+      personManagerId: $personManagerId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        alias
+        name
+        email
+        status
+        sixManagerAlias
+        isManager
+        isBizOps
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Manager {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Organization {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        personPlanId
+        personManagerId
+        personOrganizationId
         createdAt
         updatedAt
         __typename
@@ -472,20 +2474,22 @@ export const getOrganization = /* GraphQL */ `
       name
       description
       headcount
-      Teams {
-        items {
-          id
-          name
-          description
-          headcount
-          organizationID
-          createdAt
-          updatedAt
-          teamManagerId
-          teamInputGoalId
-          __typename
-        }
-        nextToken
+      incTarget
+      mgrTarget
+      icTarget
+      peTarget
+      pmTarget
+      tpmTarget
+      argTarget
+      Plan {
+        id
+        title
+        description
+        year
+        ktloTarget
+        status
+        createdAt
+        updatedAt
         __typename
       }
       Manager {
@@ -493,31 +2497,133 @@ export const getOrganization = /* GraphQL */ `
         alias
         name
         email
-        createdAt
-        updatedAt
-        __typename
-      }
-      OutputGoals {
-        items {
+        status
+        sixManagerAlias
+        isManager
+        isBizOps
+        Plan {
           id
           title
           description
+          year
+          ktloTarget
           status
-          class
-          start
-          end
-          organizationID
           createdAt
           updatedAt
           __typename
         }
-        nextToken
+        Manager {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Organization {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        personPlanId
+        personManagerId
+        personOrganizationId
+        createdAt
+        updatedAt
         __typename
       }
-      planID
+      Parent {
+        id
+        name
+        description
+        headcount
+        incTarget
+        mgrTarget
+        icTarget
+        peTarget
+        pmTarget
+        tpmTarget
+        argTarget
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Manager {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Parent {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        organizationPlanId
+        organizationManagerId
+        organizationParentId
+        createdAt
+        updatedAt
+        __typename
+      }
+      organizationPlanId
+      organizationManagerId
+      organizationParentId
       createdAt
       updatedAt
-      organizationManagerId
       __typename
     }
   }
@@ -534,8 +2640,22 @@ export const listOrganizations = /* GraphQL */ `
         name
         description
         headcount
-        Teams {
-          nextToken
+        incTarget
+        mgrTarget
+        icTarget
+        peTarget
+        pmTarget
+        tpmTarget
+        argTarget
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
           __typename
         }
         Manager {
@@ -543,18 +2663,41 @@ export const listOrganizations = /* GraphQL */ `
           alias
           name
           email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
           createdAt
           updatedAt
           __typename
         }
-        OutputGoals {
-          nextToken
+        Parent {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
           __typename
         }
-        planID
+        organizationPlanId
+        organizationManagerId
+        organizationParentId
         createdAt
         updatedAt
-        organizationManagerId
         __typename
       }
       nextToken
@@ -562,16 +2705,16 @@ export const listOrganizations = /* GraphQL */ `
     }
   }
 `;
-export const organizationsByPlanID = /* GraphQL */ `
-  query OrganizationsByPlanID(
-    $planID: ID!
+export const OrganizationsByPlan = /* GraphQL */ `
+  query OrganizationsByPlan(
+    $organizationPlanId: ID!
     $sortDirection: ModelSortDirection
     $filter: ModelOrganizationFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    organizationsByPlanID(
-      planID: $planID
+    OrganizationsByPlan(
+      organizationPlanId: $organizationPlanId
       sortDirection: $sortDirection
       filter: $filter
       limit: $limit
@@ -582,8 +2725,22 @@ export const organizationsByPlanID = /* GraphQL */ `
         name
         description
         headcount
-        Teams {
-          nextToken
+        incTarget
+        mgrTarget
+        icTarget
+        peTarget
+        pmTarget
+        tpmTarget
+        argTarget
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
           __typename
         }
         Manager {
@@ -591,18 +2748,211 @@ export const organizationsByPlanID = /* GraphQL */ `
           alias
           name
           email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
           createdAt
           updatedAt
           __typename
         }
-        OutputGoals {
-          nextToken
+        Parent {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
           __typename
         }
-        planID
+        organizationPlanId
+        organizationManagerId
+        organizationParentId
         createdAt
         updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const OrganizationsByManager = /* GraphQL */ `
+  query OrganizationsByManager(
+    $organizationManagerId: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelOrganizationFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    OrganizationsByManager(
+      organizationManagerId: $organizationManagerId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        name
+        description
+        headcount
+        incTarget
+        mgrTarget
+        icTarget
+        peTarget
+        pmTarget
+        tpmTarget
+        argTarget
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Manager {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Parent {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        organizationPlanId
         organizationManagerId
+        organizationParentId
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const OrganizationsByParent = /* GraphQL */ `
+  query OrganizationsByParent(
+    $organizationParentId: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelOrganizationFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    OrganizationsByParent(
+      organizationParentId: $organizationParentId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        name
+        description
+        headcount
+        incTarget
+        mgrTarget
+        icTarget
+        peTarget
+        pmTarget
+        tpmTarget
+        argTarget
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Manager {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Parent {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        organizationPlanId
+        organizationManagerId
+        organizationParentId
+        createdAt
+        updatedAt
         __typename
       }
       nextToken
@@ -617,22 +2967,106 @@ export const getInitiative = /* GraphQL */ `
       title
       description
       rank
-      themeID
-      planID
+      bucket
       status
+      Plan {
+        id
+        title
+        description
+        year
+        ktloTarget
+        status
+        createdAt
+        updatedAt
+        __typename
+      }
+      Theme {
+        id
+        title
+        description
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        themePlanId
+        createdAt
+        updatedAt
+        __typename
+      }
       Sponsor {
         id
         alias
         name
         email
+        status
+        sixManagerAlias
+        isManager
+        isBizOps
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Manager {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Organization {
+          id
+          name
+          description
+          headcount
+          incTarget
+          mgrTarget
+          icTarget
+          peTarget
+          pmTarget
+          tpmTarget
+          argTarget
+          organizationPlanId
+          organizationManagerId
+          organizationParentId
+          createdAt
+          updatedAt
+          __typename
+        }
+        personPlanId
+        personManagerId
+        personOrganizationId
         createdAt
         updatedAt
         __typename
       }
-      bucket
+      initiativePlanId
+      initiativeThemeId
+      initiativeSponsorId
       createdAt
       updatedAt
-      initiativeSponsorId
       __typename
     }
   }
@@ -649,22 +3083,49 @@ export const listInitiatives = /* GraphQL */ `
         title
         description
         rank
-        themeID
-        planID
+        bucket
         status
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Theme {
+          id
+          title
+          description
+          themePlanId
+          createdAt
+          updatedAt
+          __typename
+        }
         Sponsor {
           id
           alias
           name
           email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
           createdAt
           updatedAt
           __typename
         }
-        bucket
+        initiativePlanId
+        initiativeThemeId
+        initiativeSponsorId
         createdAt
         updatedAt
-        initiativeSponsorId
         __typename
       }
       nextToken
@@ -672,16 +3133,18 @@ export const listInitiatives = /* GraphQL */ `
     }
   }
 `;
-export const initiativesByThemeID = /* GraphQL */ `
-  query InitiativesByThemeID(
-    $themeID: ID!
+export const InitiativesByPlan = /* GraphQL */ `
+  query InitiativesByPlan(
+    $initiativePlanId: ID!
+    $bucket: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelInitiativeFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    initiativesByThemeID(
-      themeID: $themeID
+    InitiativesByPlan(
+      initiativePlanId: $initiativePlanId
+      bucket: $bucket
       sortDirection: $sortDirection
       filter: $filter
       limit: $limit
@@ -692,22 +3155,49 @@ export const initiativesByThemeID = /* GraphQL */ `
         title
         description
         rank
-        themeID
-        planID
+        bucket
         status
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Theme {
+          id
+          title
+          description
+          themePlanId
+          createdAt
+          updatedAt
+          __typename
+        }
         Sponsor {
           id
           alias
           name
           email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
           createdAt
           updatedAt
           __typename
         }
-        bucket
+        initiativePlanId
+        initiativeThemeId
+        initiativeSponsorId
         createdAt
         updatedAt
-        initiativeSponsorId
         __typename
       }
       nextToken
@@ -715,16 +3205,16 @@ export const initiativesByThemeID = /* GraphQL */ `
     }
   }
 `;
-export const initiativesByPlanID = /* GraphQL */ `
-  query InitiativesByPlanID(
-    $planID: ID!
+export const InitiativesByTheme = /* GraphQL */ `
+  query InitiativesByTheme(
+    $initiativeThemeId: ID!
     $sortDirection: ModelSortDirection
     $filter: ModelInitiativeFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    initiativesByPlanID(
-      planID: $planID
+    InitiativesByTheme(
+      initiativeThemeId: $initiativeThemeId
       sortDirection: $sortDirection
       filter: $filter
       limit: $limit
@@ -735,22 +3225,119 @@ export const initiativesByPlanID = /* GraphQL */ `
         title
         description
         rank
-        themeID
-        planID
+        bucket
         status
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Theme {
+          id
+          title
+          description
+          themePlanId
+          createdAt
+          updatedAt
+          __typename
+        }
         Sponsor {
           id
           alias
           name
           email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
           createdAt
           updatedAt
           __typename
         }
-        bucket
+        initiativePlanId
+        initiativeThemeId
+        initiativeSponsorId
         createdAt
         updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const InitiativesBySponsor = /* GraphQL */ `
+  query InitiativesBySponsor(
+    $initiativeSponsorId: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelInitiativeFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    InitiativesBySponsor(
+      initiativeSponsorId: $initiativeSponsorId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        title
+        description
+        rank
+        bucket
+        status
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
+          __typename
+        }
+        Theme {
+          id
+          title
+          description
+          themePlanId
+          createdAt
+          updatedAt
+          __typename
+        }
+        Sponsor {
+          id
+          alias
+          name
+          email
+          status
+          sixManagerAlias
+          isManager
+          isBizOps
+          personPlanId
+          personManagerId
+          personOrganizationId
+          createdAt
+          updatedAt
+          __typename
+        }
+        initiativePlanId
+        initiativeThemeId
         initiativeSponsorId
+        createdAt
+        updatedAt
         __typename
       }
       nextToken
@@ -764,25 +3351,18 @@ export const getTheme = /* GraphQL */ `
       id
       title
       description
-      planID
-      Initiatives {
-        items {
-          id
-          title
-          description
-          rank
-          themeID
-          planID
-          status
-          bucket
-          createdAt
-          updatedAt
-          initiativeSponsorId
-          __typename
-        }
-        nextToken
+      Plan {
+        id
+        title
+        description
+        year
+        ktloTarget
+        status
+        createdAt
+        updatedAt
         __typename
       }
+      themePlanId
       createdAt
       updatedAt
       __typename
@@ -800,11 +3380,18 @@ export const listThemes = /* GraphQL */ `
         id
         title
         description
-        planID
-        Initiatives {
-          nextToken
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
           __typename
         }
+        themePlanId
         createdAt
         updatedAt
         __typename
@@ -814,16 +3401,16 @@ export const listThemes = /* GraphQL */ `
     }
   }
 `;
-export const themesByPlanID = /* GraphQL */ `
-  query ThemesByPlanID(
-    $planID: ID!
+export const ThemesByPlan = /* GraphQL */ `
+  query ThemesByPlan(
+    $themePlanId: ID!
     $sortDirection: ModelSortDirection
     $filter: ModelThemeFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    themesByPlanID(
-      planID: $planID
+    ThemesByPlan(
+      themePlanId: $themePlanId
       sortDirection: $sortDirection
       filter: $filter
       limit: $limit
@@ -833,11 +3420,18 @@ export const themesByPlanID = /* GraphQL */ `
         id
         title
         description
-        planID
-        Initiatives {
-          nextToken
+        Plan {
+          id
+          title
+          description
+          year
+          ktloTarget
+          status
+          createdAt
+          updatedAt
           __typename
         }
+        themePlanId
         createdAt
         updatedAt
         __typename
@@ -854,52 +3448,8 @@ export const getPlan = /* GraphQL */ `
       title
       description
       year
-      Themes {
-        items {
-          id
-          title
-          description
-          planID
-          createdAt
-          updatedAt
-          __typename
-        }
-        nextToken
-        __typename
-      }
-      Initiatives {
-        items {
-          id
-          title
-          description
-          rank
-          themeID
-          planID
-          status
-          bucket
-          createdAt
-          updatedAt
-          initiativeSponsorId
-          __typename
-        }
-        nextToken
-        __typename
-      }
-      Organizations {
-        items {
-          id
-          name
-          description
-          headcount
-          planID
-          createdAt
-          updatedAt
-          organizationManagerId
-          __typename
-        }
-        nextToken
-        __typename
-      }
+      ktloTarget
+      status
       createdAt
       updatedAt
       __typename
@@ -918,18 +3468,39 @@ export const listPlans = /* GraphQL */ `
         title
         description
         year
-        Themes {
-          nextToken
-          __typename
-        }
-        Initiatives {
-          nextToken
-          __typename
-        }
-        Organizations {
-          nextToken
-          __typename
-        }
+        ktloTarget
+        status
+        createdAt
+        updatedAt
+        __typename
+      }
+      nextToken
+      __typename
+    }
+  }
+`;
+export const PlansByStatus = /* GraphQL */ `
+  query PlansByStatus(
+    $status: Status!
+    $sortDirection: ModelSortDirection
+    $filter: ModelPlanFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    PlansByStatus(
+      status: $status
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        title
+        description
+        year
+        ktloTarget
+        status
         createdAt
         updatedAt
         __typename

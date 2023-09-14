@@ -42,11 +42,11 @@ export const columnDefinitions = [
     sortingField: "description",
   },
   {
-    id: "planID",
+    id: "planTitle",
     header: "Plan",
-    cell: (item) => item.planID,
+    cell: (item) => item.Plan.title,
     ariaLabel: createLabelFunction("Sescription"),
-    sortingField: "planID",
+    sortingField: "planTitle",
   },
   {
     id: "createdAt",
@@ -74,7 +74,7 @@ const pageSizePreference = {
   title: "Select page size",
   options: [
     { value: 10, label: "10 resources" },
-    { value: 20, label: "20 resources" },
+    { value: 20, label: "20 resources" }
   ],
 };
 
@@ -86,7 +86,7 @@ const visibleContentPreference = {
       options: columnDefinitions.map(({ id, header }) => ({
         id,
         label: header,
-        editable: id !== "id",
+        editable: id !== "id"
       })),
     },
   ],
