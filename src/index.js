@@ -22,6 +22,7 @@ import { InitiativeChart } from "./components/analysis/InitiativeChart";
 import { BucketChart } from "./components/analysis/BucketChart";
 import { DashboardView } from "./components/analysis/DashboardView";
 Amplify.configure(awsExports);
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
